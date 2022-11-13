@@ -1,0 +1,9 @@
+@import "../../styles/styles";
+
+.home-page {
+  height: fit-content;
+  min-height: 88vh;
+  width: 100%;
+  background-color: #ddd;
+  @include flex;
+}

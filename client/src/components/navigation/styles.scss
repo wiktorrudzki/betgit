@@ -1,0 +1,90 @@
+@import "../../styles/styles";
+
+.nav {
+  height: 12vh;
+  width: 100%;
+  @include flex;
+}
+
+.ul {
+  margin: 0;
+  list-style: none;
+  width: 100%;
+  @include flex(row, space-between);
+  padding: 0em 2.5em;
+}
+
+.li {
+  @include flex;
+  gap: 2em;
+}
+
+.link {
+  text-decoration: none;
+  color: #000;
+  position: relative;
+  font-size: 1.3em;
+}
+
+.link:visited,
+.link:active {
+  text-decoration: none;
+  color: #000;
+}
+
+.logo {
+  font-style: italic;
+  text-decoration: none;
+  padding-right: 0.8em;
+  font-weight: 600;
+  font-size: 1.6em;
+  color: var(--primary);
+  transition: none;
+  cursor: pointer;
+}
+
+.logo:visited,
+.logo:active {
+  color: var(--primary);
+}
+
+.link::after {
+  transition: 0.5s ease-in-out;
+  content: "";
+  position: relative;
+  width: 0%;
+  bottom: -4px;
+  height: 2px;
+  display: block;
+  background-color: var(--primary);
+  margin: auto;
+}
+
+.link:hover::after {
+  width: 100%;
+}
+
+.link-active {
+  text-decoration: none;
+  color: #000;
+  position: relative;
+  font-size: 1.3em;
+}
+
+.link-active:visited,
+.link-active:active {
+  text-decoration: none;
+  color: #000;
+}
+
+.link-active::after {
+  transition: 0.5s ease-in-out;
+  content: "";
+  position: relative;
+  width: 100%;
+  bottom: -4px;
+  height: 2px;
+  display: block;
+  background-color: var(--primary);
+  margin: auto;
+}
