@@ -1,24 +1,28 @@
 import { useEffect, useState } from "react";
 import Axios from "axios";
+import UserScore from "./components/UserScore";
+import "./styles.css";
 
 type Props = {
   changeRoute: React.Dispatch<React.SetStateAction<string>>;
 };
 
-type Users = {
+type User = {
   username: string;
   points: number;
 };
 
 const Ranking = ({ changeRoute }: Props) => {
-  const [allUsers, setAllUsers] = useState<Users[]>([]);
+  const [allUsers, setAllUsers] = useState<User[]>([]);
 
   useEffect(() => {
     changeRoute("/ranking");
 
     Axios.get("http://localhost:3001/").then((res: any) => {
       if (res.data.get) {
-        setAllUsers(res.data.data);
+        setAllUsers(
+          res.data.data.sort((a: User, b: User) => b.points - a.points)
+        );
       } else {
         console.log("error while getting users");
       }
@@ -27,16 +31,16 @@ const Ranking = ({ changeRoute }: Props) => {
   }, []);
 
   return (
-    <div>
-      {allUsers.map((user: Users) => {
-        return (
-          <div key={user.username}>
-            <h2>
-              User: {user.username} Points: {user.points}
-            </h2>
-          </div>
-        );
-      })}
+    <div className="ranking-wrapper">
+      <div className="ranking">
+        <div className="user-score category">
+          <h2>Użytkownik</h2>
+          <h2>Punkty</h2>
+        </div>
+        {allUsers.map((user: User, index: number) => {
+          return <UserScore key={user.username} user={user} index={index} />;
+        })}
+      </div>
     </div>
   );
 };

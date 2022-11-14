@@ -1,0 +1,37 @@
+@import "../../styles/styles";
+
+.ranking-wrapper {
+  background-color: var(--gray);
+  @include flex;
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.ranking {
+  background-color: var(--white);
+  @include flex(column);
+  gap: 1em;
+  width: 26em;
+  border-radius: 12px;
+}
+
+.user-score {
+  @include flex(row, space-between);
+  width: 100%;
+  padding-right: 2em;
+  padding-left: 2em;
+  gap: 2em;
+  font-size: 0.9em;
+}
+
+.user-score > h2 {
+  font-weight: 400;
+}
+
+.category {
+  border-bottom: 2px solid var(--gray);
+}
+
+.category > h2 {
+  font-weight: bold;
+}

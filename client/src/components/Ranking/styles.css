@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+* {
+  box-sizing: border-box;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+:root {
+  --black: #000;
+  --primary: #ffd700;
+  --gray: #eee;
+  --white: #fff;
+}
+
+.ranking-wrapper {
+  background-color: var(--gray);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.ranking {
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  width: 26em;
+  border-radius: 12px;
+}
+
+.user-score {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-right: 2em;
+  padding-left: 2em;
+  gap: 2em;
+  font-size: 0.9em;
+}
+
+.user-score > h2 {
+  font-weight: 400;
+}
+
+.category {
+  border-bottom: 2px solid var(--gray);
+}
+
+.category > h2 {
+  font-weight: bold;
+}/*# sourceMappingURL=styles.css.map */
