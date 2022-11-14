@@ -1,0 +1,26 @@
+@import "../../styles/styles";
+
+.logout-wrapper {
+  height: 88vh;
+  @include flex(column);
+  gap: 2.5em;
+}
+
+.logout-btn {
+  background: linear-gradient(to left, var(--white) 50%, var(--primary) 50%)
+    right;
+  background-size: 200%;
+  color: var(--black);
+  border-radius: 10px;
+  border: 2px solid black;
+  padding: 1em 2em;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s all ease-out;
+}
+
+.logout-btn:hover {
+  background-position: left;
+}

@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
 import { useRoute } from "../../hooks/useRoute";
+import { useUser } from "../../hooks/useUser";
+import userIcon from "../../images/user.svg";
 import "./styles.css";
 
 const Nav = () => {
   const { currentRoute } = useRoute();
+  const { currentUser } = useUser();
 
   const checkRoute = (route: string) => {
     if (route === "/") {
-      console.log(currentRoute === route);
       return currentRoute === route;
     } else {
-      console.log(currentRoute.includes(route));
       return currentRoute.includes(route);
     }
   };
@@ -41,14 +42,39 @@ const Nav = () => {
             Ranking
           </Link>
         </li>
-        <li className="li">
-          <Link to="/" className="link">
-            Zaloguj się
-          </Link>
-          <Link to="/" className="link">
-            Zarejestruj się
-          </Link>
-        </li>
+        {currentUser !== null ? (
+          <li className="li">
+            <div className="nav-user-wrapper">
+              <img style={{ width: "1.5em" }} src={userIcon} alt="user icon" />
+              <h3>{currentUser.username}</h3>
+            </div>
+            <Link
+              to="/wylogowanie"
+              className={`${
+                checkRoute("/wylogowanie") ? "link-active" : "link"
+              }`}
+            >
+              Wyloguj się
+            </Link>
+          </li>
+        ) : (
+          <li className="li">
+            <Link
+              to="/logowanie"
+              className={`${checkRoute("/logowanie") ? "link-active" : "link"}`}
+            >
+              Zaloguj się
+            </Link>
+            <Link
+              to="/rejestracja"
+              className={`${
+                checkRoute("/rejestracja") ? "link-active" : "link"
+              }`}
+            >
+              Zarejestruj się
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

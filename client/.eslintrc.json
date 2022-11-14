@@ -20,7 +20,7 @@
   },
   "overrides": [
     {
-      "files": ["*.jsx", "*.tsx"]
+      "files": ["*.jsx", "*.tsx", "*.svg"]
     }
   ]
 }

@@ -1,0 +1,86 @@
+@import "../../styles/styles";
+
+.form-wrapper {
+  height: 88vh;
+  @include flex(column);
+  gap: 3em;
+  background-color: var(--gray);
+}
+
+.form {
+  @include flex(column);
+  gap: 2em;
+  border-radius: 10%;
+  padding: 2em 2em;
+  background-color: var(--white);
+}
+
+.form-title {
+  padding: 0;
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.form-input {
+  width: 100%;
+  border-radius: 10px;
+  outline: none;
+  background-color: #eee;
+  border: none;
+  font-size: 1.2em;
+  padding: 0.4em 0.8em;
+}
+
+.submit-btn {
+  background: linear-gradient(to left, var(--white) 50%, var(--primary) 50%)
+    right;
+  background-size: 200%;
+  color: var(--black);
+  border-radius: 10px;
+  border: 2px solid black;
+  width: 100%;
+  padding: 1em 2em;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s all ease-out;
+}
+
+.submit-btn:hover {
+  background-position: left;
+}
+
+.disable-submit-btn {
+  cursor: not-allowed;
+}
+
+.disable-submit-btn:hover {
+  background-position: right;
+}
+
+.alternative-option {
+  @include flex(column);
+  gap: 0;
+}
+
+.form-alternative-option {
+  padding: 0;
+  margin: 0;
+}
+
+.form-link {
+  text-decoration: none;
+  color: #000;
+  position: relative;
+  font-size: 1.3em;
+  font-size: 1.2em;
+  padding: 0;
+  margin: 0;
+}
+
+.form-link:visited,
+.form-link:active {
+  text-decoration: none;
+  color: #000;
+}

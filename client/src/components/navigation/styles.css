@@ -18,6 +18,7 @@ body {
 :root {
   --black: #000;
   --primary: #ffd700;
+  --gray: #eee;
   --white: #fff;
 }
 
@@ -66,6 +67,7 @@ body {
   font-style: italic;
   text-decoration: none;
   padding-right: 0.8em;
+  margin: 0;
   font-weight: 600;
   font-size: 1.6em;
   color: var(--primary);
@@ -117,4 +119,16 @@ body {
   display: block;
   background-color: var(--primary);
   margin: auto;
+}
+
+.nav-user-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.nav-user-wrapper > h3 {
+  font-size: 1.3em;
 }/*# sourceMappingURL=styles.css.map */

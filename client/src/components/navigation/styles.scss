@@ -36,6 +36,7 @@
   font-style: italic;
   text-decoration: none;
   padding-right: 0.8em;
+  margin: 0;
   font-weight: 600;
   font-size: 1.6em;
   color: var(--primary);
@@ -87,4 +88,13 @@
   display: block;
   background-color: var(--primary);
   margin: auto;
+}
+
+.nav-user-wrapper {
+  @include flex;
+  gap: 0.6em;
+}
+
+.nav-user-wrapper > h3 {
+  font-size: 1.3em;
 }

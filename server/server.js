@@ -7,6 +7,7 @@ const mysql = require("mysql");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { verifyJWT } = require("./middlewares/verifyJwt");
 
 const saltRounds = 10;
 
@@ -137,7 +138,7 @@ app.post("/login", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  const dbSelect = "SELECT * FROM betgit.users;";
+  const dbSelect = "SELECT * FROM betgit.users WHERE admin = false;";
 
   db.query(dbSelect, [], (err, result) => {
     if (err) {
@@ -147,6 +148,27 @@ app.get("/", (req, res) => {
         return { username: user.username, points: user.points };
       });
       res.json({ get: true, message: "got all users", data: data });
+    }
+  });
+});
+
+app.get("/user/remember", verifyJWT, (req, res) => {
+  const id = req.userId;
+
+  if (!id) {
+    return res.json({ auth: false, message: "didnt have user id" });
+  }
+
+  db.query("SELECT * FROM users WHERE id = ?", id, (err, result) => {
+    if (result && result.length > 0) {
+      res.json({
+        auth: true,
+        message: "welcome back",
+        username: result[0].username,
+        id: result[0].id,
+      });
+    } else {
+      res.send({ auth: false, message: "didnt find a user" });
     }
   });
 });

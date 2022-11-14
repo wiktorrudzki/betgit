@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+* {
+  box-sizing: border-box;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+:root {
+  --black: #000;
+  --primary: #ffd700;
+  --gray: #eee;
+  --white: #fff;
+}
+
+.logout-wrapper {
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5em;
+}
+
+.logout-btn {
+  background: linear-gradient(to left, var(--white) 50%, var(--primary) 50%) right;
+  background-size: 200%;
+  color: var(--black);
+  border-radius: 10px;
+  border: 2px solid black;
+  padding: 1em 2em;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s all ease-out;
+}
+
+.logout-btn:hover {
+  background-position: left;
+}/*# sourceMappingURL=styles.css.map */

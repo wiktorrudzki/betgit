@@ -30,7 +30,7 @@ const Ranking = ({ changeRoute }: Props) => {
     <div>
       {allUsers.map((user: Users) => {
         return (
-          <div>
+          <div key={user.username}>
             <h2>
               User: {user.username} Points: {user.points}
             </h2>
