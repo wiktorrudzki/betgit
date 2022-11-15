@@ -1,9 +1,11 @@
 @import "../../styles/styles";
 
 .home-page {
+  padding-top: 2em;
+  padding-bottom: 2em;
   height: fit-content;
   min-height: 88vh;
   width: 100%;
   background-color: #ddd;
-  @include flex;
+  @include flex(column, flex-start);
 }

@@ -18,10 +18,13 @@ body {
 :root {
   --black: #000;
   --primary: #ffd700;
+  --gray: #eee;
   --white: #fff;
 }
 
 .home-page {
+  padding-top: 2em;
+  padding-bottom: 2em;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -29,7 +32,7 @@ body {
   width: 100%;
   background-color: #ddd;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
 }/*# sourceMappingURL=styles.css.map */

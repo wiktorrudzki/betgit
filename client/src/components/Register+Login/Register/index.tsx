@@ -119,7 +119,11 @@ const Register = ({ changeRoute }: Props) => {
           username: registerStatus.username,
           password: registerStatus.password,
         }).then((res) => {
-          setCurrentUser({ username: res.data.username, id: res.data.id });
+          setCurrentUser({
+            username: res.data.username,
+            id: res.data.id,
+            isAdmin: res.data.isAdmin,
+          });
           localStorage.setItem("token", "Bearer " + res.data.token);
           localStorage.setItem("user", res.data.id);
         });

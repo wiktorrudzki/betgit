@@ -27,14 +27,18 @@ const Nav = () => {
             to="/"
             className={`${checkRoute("/") ? "link-active" : "link"}`}
           >
-            Obstawiaj
+            {currentUser?.isAdmin ? "Kontroluj grę" : "Obstawiaj"}
           </Link>
-          <Link
-            to="/mojeBety"
-            className={`${checkRoute("/mojeBety") ? "link-active" : "link"}`}
-          >
-            Moje bety
-          </Link>
+          {currentUser?.isAdmin ? (
+            ""
+          ) : (
+            <Link
+              to="/mojeBety"
+              className={`${checkRoute("/mojeBety") ? "link-active" : "link"}`}
+            >
+              Moje bety
+            </Link>
+          )}
           <Link
             to="/ranking"
             className={`${checkRoute("/ranking") ? "link-active" : "link"}`}

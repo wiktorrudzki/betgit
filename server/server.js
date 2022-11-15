@@ -118,6 +118,7 @@ app.post("/login", (req, res) => {
             username: username,
             id: id,
             token: token,
+            isAdmin: result[0].admin,
           });
         } else {
           res.json({
@@ -159,16 +160,69 @@ app.get("/user/remember", verifyJWT, (req, res) => {
     return res.json({ auth: false, message: "didnt have user id" });
   }
 
-  db.query("SELECT * FROM users WHERE id = ?", id, (err, result) => {
+  db.query("SELECT * FROM betgit.users WHERE id = ?", id, (err, result) => {
     if (result && result.length > 0) {
       res.json({
         auth: true,
         message: "welcome back",
         username: result[0].username,
         id: result[0].id,
+        isAdmin: result[0].admin,
       });
     } else {
       res.send({ auth: false, message: "didnt find a user" });
+    }
+  });
+});
+
+app.get("/matches/", (req, res) => {
+  const dbSelect = "SELECT * FROM betgit.matches";
+
+  db.query(dbSelect, [], (err, result) => {
+    if (err) {
+      res.json({ got: false, message: "error while getting matches" });
+    } else {
+      res.json({
+        got: true,
+        message: "succesfully taken all matches",
+        data: result,
+      });
+    }
+  });
+});
+
+app.post("/matches/add", verifyJWT, (req, res) => {
+  const team1 = req.body.team1;
+  const team2 = req.body.team2;
+  let match_time = req.body.matchTime;
+
+  match_time = match_time.slice(0, 19);
+
+  const dbInsert =
+    "INSERT INTO betgit.matches (team1, team2, match_time) VALUES (?, ?, ?)";
+
+  db.query(dbInsert, [team1, team2, match_time], (err, result) => {
+    if (err) {
+      res.json({ added: false, message: "error while adding new match" });
+    } else {
+      res.json({ added: true, message: "succesfully added new match to db" });
+    }
+  });
+});
+
+app.post("/matches/changeScore", verifyJWT, (req, res) => {
+  const team1_score = req.body.team1_score;
+  const team2_score = req.body.team2_score;
+  const id = req.body.id;
+
+  const dbInsert =
+    "UPDATE betgit.matches SET team1_score = ?, team2_score = ? WHERE id = ?;";
+
+  db.query(dbInsert, [team1_score, team2_score, id], (err, result) => {
+    if (err) {
+      res.json({ changed: false, message: "error while changing score" });
+    } else {
+      res.json({ added: true, message: "succesfully changed score" });
     }
   });
 });

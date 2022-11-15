@@ -7,6 +7,7 @@ type Props = {
 type User = {
   username: string;
   id: number;
+  isAdmin: boolean;
 };
 
 type UserProviderType = {

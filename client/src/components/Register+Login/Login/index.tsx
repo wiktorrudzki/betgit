@@ -68,10 +68,13 @@ const Login = ({ changeRoute }: Props) => {
       username: loginStatus.username,
       password: loginStatus.password,
     }).then((res) => {
-      console.log(res);
       if (res.data.logged) {
         dispatchLoginStatus({ type: "clear" });
-        setCurrentUser({ username: res.data.username, id: res.data.id });
+        setCurrentUser({
+          username: res.data.username,
+          id: res.data.id,
+          isAdmin: res.data.isAdmin,
+        });
         localStorage.setItem("token", "Bearer " + res.data.token);
         localStorage.setItem("user", res.data.id);
         navigate("/");

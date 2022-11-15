@@ -22,7 +22,11 @@ function App() {
       },
     }).then((res) => {
       if (res.data.auth) {
-        setCurrentUser({ username: res.data.username, id: res.data.id });
+        setCurrentUser({
+          username: res.data.username,
+          id: res.data.id,
+          isAdmin: res.data.isAdmin,
+        });
       } else {
         console.log("failed to authenticate");
       }
