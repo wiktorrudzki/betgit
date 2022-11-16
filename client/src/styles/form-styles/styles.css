@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+* {
+  box-sizing: border-box;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+:root {
+  --black: #000;
+  --primary: #ffd700;
+  --gray: #eee;
+  --white: #fff;
+}
+
+.form-wrapper {
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3em;
+  background-color: var(--gray);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  border-radius: 10%;
+  padding: 2em 2em;
+  background-color: var(--white);
+}
+
+.form-title {
+  padding: 0;
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.form-input {
+  width: 100%;
+  border-radius: 10px;
+  outline: none;
+  background-color: #eee;
+  border: none;
+  font-size: 1.2em;
+  padding: 0.4em 0.8em;
+}
+
+.submit-btn {
+  background: linear-gradient(to left, var(--white) 50%, var(--primary) 50%) right;
+  background-size: 200%;
+  color: var(--black);
+  border-radius: 10px;
+  border: 2px solid black;
+  width: 100%;
+  padding: 1em 0;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s all ease-out;
+}
+
+.submit-btn:hover {
+  background-position: left;
+}
+
+.disable-submit-btn {
+  cursor: not-allowed;
+}
+
+.disable-submit-btn:hover {
+  background-position: right;
+}
+
+@media (max-width: 1024px) {
+  .form-title {
+    font-size: 1.5em;
+  }
+  .form-input {
+    font-size: 1em;
+  }
+  .submit-btn {
+    padding: 1.25em 0;
+    font-size: 0.8em;
+  }
+}/*# sourceMappingURL=styles.css.map */

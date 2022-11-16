@@ -98,3 +98,32 @@
 .nav-user-wrapper > h3 {
   font-size: 1.3em;
 }
+
+@media (max-width: 1024px) {
+  .ul {
+    padding: 0em 2em;
+  }
+  .li {
+    gap: 1.5em;
+  }
+  .link {
+    font-size: 1.1em;
+  }
+  .logo {
+    padding-right: 0.7em;
+    font-size: 1.4em;
+  }
+  .link-active {
+    font-size: 1.1em;
+  }
+  .nav-user-wrapper {
+    gap: 0.5em;
+  }
+  .nav-user-wrapper > h3 {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 768px) {
+  //TODO
+}

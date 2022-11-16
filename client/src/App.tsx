@@ -11,6 +11,9 @@ import { useUser } from "./hooks/useUser";
 import { useEffect } from "react";
 import Axios from "axios";
 
+import "./styles/form-styles/styles.css";
+import "./styles/match-form-styles/styles.css";
+
 function App() {
   const { setCurrentRoute } = useRoute();
   const { setCurrentUser } = useUser();

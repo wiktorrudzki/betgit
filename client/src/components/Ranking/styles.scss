@@ -35,3 +35,10 @@
 .category > h2 {
   font-weight: bold;
 }
+
+@media (max-width: 1024px) {
+  .user-score {
+    gap: 1.5em;
+    font-size: 0.85em;
+  }
+}

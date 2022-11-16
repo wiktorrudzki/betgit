@@ -107,7 +107,6 @@ const AdminHome = () => {
           <input
             value={newMatchStatus.team1}
             required
-            style={{ width: "60%" }}
             className="form-input"
             onChange={(e) => {
               dispatchNewMatchStatus({
@@ -120,7 +119,6 @@ const AdminHome = () => {
           />
           <input
             value={newMatchStatus.team2}
-            style={{ width: "60%" }}
             required
             className="form-input"
             onChange={(e) => {
@@ -139,14 +137,12 @@ const AdminHome = () => {
                 payload: new Date(e.target.value),
               });
             }}
-            style={{ width: "60%" }}
             required
             className="form-input"
             type="datetime-local"
           />
           <button
             onClick={addMatch}
-            style={{ width: "60%" }}
             className={`submit-btn ${
               newMatchStatus.team1 === "" ||
               newMatchStatus.team2 === "" ||
