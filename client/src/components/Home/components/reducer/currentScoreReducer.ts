@@ -1,4 +1,4 @@
-import { Match } from "../../types/Match";
+import { Match } from "../types/Match";
 
 type Actions =
   | { type: "team1_score"; payload: string }

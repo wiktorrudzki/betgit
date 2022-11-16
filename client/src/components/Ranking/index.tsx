@@ -2,14 +2,10 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import UserScore from "./components/UserScore";
 import "./styles.css";
+import { User } from "./types";
 
 type Props = {
   changeRoute: React.Dispatch<React.SetStateAction<string>>;
-};
-
-type User = {
-  username: string;
-  points: number;
 };
 
 const Ranking = ({ changeRoute }: Props) => {

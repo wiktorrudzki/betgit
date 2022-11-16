@@ -3,8 +3,9 @@ import Axios from "axios";
 import "./styles.css";
 import { addHours } from "date-fns";
 import { newMatchReducer } from "./reducer/newMatchReducer";
-import { Match } from "./types/Match";
-import ChangeScore from "./components/ChangeScore";
+import { Match } from "../types/Match";
+import ChangeScoreAdmin from "./components/ChangeScoreAdmin";
+import { User } from "../../../Ranking/types";
 
 const AdminHome = () => {
   const [newMatchStatus, dispatchNewMatchStatus] = useReducer(newMatchReducer, {
@@ -14,6 +15,7 @@ const AdminHome = () => {
   });
 
   const [allMatches, setAllMatches] = useState<Match[]>([]);
+  const [showMatchesAfter, setShowMatchesAfter] = useState<string | null>(null);
 
   const addMatch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,6 +42,32 @@ const AdminHome = () => {
       }
     ).then((res) => {
       if (res.data.added) {
+        Axios.get("http://localhost:3001/").then((response) => {
+          if (response.data.get) {
+            response.data.data.forEach((user: User) => {
+              Axios.post(
+                "http://localhost:3001/types/add",
+                {
+                  team1: newMatchStatus.team1,
+                  team2: newMatchStatus.team2,
+                  userId: user.id,
+                  matchId: res.data.matchId,
+                },
+                {
+                  headers: {
+                    authorization: localStorage.getItem("token"),
+                  },
+                }
+              ).then((re) => {
+                if (!re.data.added) {
+                  console.log(re.data.message);
+                }
+              });
+            });
+          } else {
+            console.log("failed to get users");
+          }
+        });
         dispatchNewMatchStatus({ type: "clear" });
         getMatches();
       } else {
@@ -50,16 +78,25 @@ const AdminHome = () => {
 
   useEffect(() => {
     getMatches();
+    //eslint-disable-next-line
   }, []);
 
   const getMatches = () => {
-    Axios.get("http://localhost:3001/matches/").then((res) => {
+    Axios.get("http://localhost:3001/matches/", {
+      headers: {
+        minDate: showMatchesAfter,
+      },
+    }).then((res) => {
       if (res.data.got) {
         setAllMatches(res.data.data);
       } else {
         console.log(res.data.message);
       }
     });
+  };
+
+  const filterMatches = () => {
+    getMatches();
   };
 
   return (
@@ -126,8 +163,23 @@ const AdminHome = () => {
       <div style={{ width: "80%" }} className="admin-form-div">
         <h2 className="admin-form-title">Wprowadź wyniki meczów</h2>
         <div className="change-score-wrapper">
+          <input
+            style={{ width: "30%" }}
+            className="form-input"
+            onChange={(e) => setShowMatchesAfter(e.target.value)}
+            type="datetime-local"
+          />
+          <button
+            style={{ width: "30%" }}
+            className={`submit-btn ${
+              showMatchesAfter === null ? "disable-submit-btn" : ""
+            }`}
+            onClick={filterMatches}
+          >
+            Filtruj
+          </button>
           {allMatches.map((match) => {
-            return <ChangeScore key={match.id} match={match} />;
+            return <ChangeScoreAdmin key={match.id} match={match} />;
           })}
         </div>
       </div>

@@ -1,3 +1,5 @@
+const { addHours } = require("date-fns");
+
 require("dotenv").config();
 
 const express = require("express");
@@ -146,7 +148,7 @@ app.get("/", (req, res) => {
       res.json({ get: false, message: "error while getting users" });
     } else {
       const data = result.map((user) => {
-        return { username: user.username, points: user.points };
+        return { username: user.username, points: user.points, id: user.id };
       });
       res.json({ get: true, message: "got all users", data: data });
     }
@@ -176,12 +178,55 @@ app.get("/user/remember", verifyJWT, (req, res) => {
 });
 
 app.get("/matches/", (req, res) => {
+  const date = req.headers["mindate"];
+
   const dbSelect = "SELECT * FROM betgit.matches";
 
   db.query(dbSelect, [], (err, result) => {
     if (err) {
       res.json({ got: false, message: "error while getting matches" });
     } else {
+      if (date) {
+        if (date === "now") {
+          result = result.filter((match) => {
+            return addHours(match.match_time, 1) > Date.now();
+          });
+          res.json({
+            got: true,
+            message: "succesfully taken all matches",
+            data: result,
+          });
+        } else {
+          result = result.filter((match) => {
+            return addHours(match.match_time, 1) > addHours(new Date(date), 1);
+          });
+          res.json({
+            got: true,
+            message: "succesfully taken all matches",
+            data: result,
+          });
+        }
+      } else {
+        res.json({
+          got: true,
+          message: "succesfully taken all matches",
+          data: result,
+        });
+      }
+    }
+  });
+});
+
+app.get("/matches/possibleToBet", (req, res) => {
+  const dbSelect = "SELECT * FROM betgit.matches";
+
+  db.query(dbSelect, [], (err, result) => {
+    if (err) {
+      res.json({ got: false, message: "error while getting matches" });
+    } else {
+      result = result.filter((match) => {
+        return addHours(match.match_time, 1) > Date.now();
+      });
       res.json({
         got: true,
         message: "succesfully taken all matches",
@@ -205,7 +250,11 @@ app.post("/matches/add", verifyJWT, (req, res) => {
     if (err) {
       res.json({ added: false, message: "error while adding new match" });
     } else {
-      res.json({ added: true, message: "succesfully added new match to db" });
+      res.json({
+        added: true,
+        message: "succesfully added new match to db",
+        matchId: result.insertId,
+      });
     }
   });
 });
@@ -223,6 +272,24 @@ app.post("/matches/changeScore", verifyJWT, (req, res) => {
       res.json({ changed: false, message: "error while changing score" });
     } else {
       res.json({ added: true, message: "succesfully changed score" });
+    }
+  });
+});
+
+app.post("/types/add", verifyJWT, (req, res) => {
+  const team1 = req.body.team1;
+  const team2 = req.body.team2;
+  const matchId = req.body.matchId;
+  const userId = req.body.userId;
+
+  const dbInsert =
+    "INSERT INTO betgit.types (team1, team2, match_id, user_id) VALUES (?, ?, ?, ?)";
+
+  db.query(dbInsert, [team1, team2, matchId, userId], (err, result) => {
+    if (err) {
+      res.json({ added: false, message: "error while adding type" });
+    } else {
+      res.json({ added: true, message: "succesfully added type" });
     }
   });
 });

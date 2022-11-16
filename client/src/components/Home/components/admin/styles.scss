@@ -31,7 +31,7 @@
 .change-score-wrapper {
   width: 100%;
   @include flex(column);
-  gap: 1em;
+  gap: 1.5em;
 }
 
 .change-score-form {

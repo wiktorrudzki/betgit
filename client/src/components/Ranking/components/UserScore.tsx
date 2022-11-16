@@ -1,9 +1,5 @@
 import { useUser } from "../../../hooks/useUser";
-
-type User = {
-  username: string;
-  points: number;
-};
+import { User } from "../types";
 
 type Props = {
   user: User;

@@ -1,13 +1,13 @@
 import { useReducer } from "react";
 import Axios from "axios";
-import { Match } from "../types/Match";
-import { currentScoreReducer } from "./reducer/currentScoreReducer";
+import { Match } from "../../types/Match";
+import { currentScoreReducer } from "../../reducer/currentScoreReducer";
 
 type Props = {
   match: Match;
 };
 
-const ChangeScore = ({ match }: Props) => {
+const ChangeScoreAdmin = ({ match }: Props) => {
   const [currentScore, dispatchCurrentScore] = useReducer(
     currentScoreReducer,
     match
@@ -33,8 +33,6 @@ const ChangeScore = ({ match }: Props) => {
     });
   };
 
-  console.log(new Date(match.match_time));
-
   return (
     <form className="change-score-form">
       <div>{new Date(match.match_time).toString().slice(4, 21)}</div>
@@ -42,9 +40,9 @@ const ChangeScore = ({ match }: Props) => {
         {match.team1} - {match.team2}
       </span>
       <span></span>
-      <div style={{ width: "12%" }}>
+      <div style={{ width: "fit-content" }}>
         <input
-          style={{ width: "30%" }}
+          style={{ width: "3em" }}
           className="form-input"
           onChange={(e) => {
             dispatchCurrentScore({
@@ -52,11 +50,11 @@ const ChangeScore = ({ match }: Props) => {
               payload: e.target.value,
             });
           }}
-          value={match.team1_score?.toString()}
+          value={currentScore.team1_score?.toString()}
         />
         <span> : </span>
         <input
-          style={{ width: "30%" }}
+          style={{ width: "3em" }}
           className="form-input"
           onChange={(e) => {
             dispatchCurrentScore({
@@ -64,7 +62,7 @@ const ChangeScore = ({ match }: Props) => {
               payload: e.target.value,
             });
           }}
-          value={match.team2_score?.toString()}
+          value={currentScore.team2_score?.toString()}
         />
       </div>
       <button
@@ -83,4 +81,4 @@ const ChangeScore = ({ match }: Props) => {
   );
 };
 
-export default ChangeScore;
+export default ChangeScoreAdmin;
