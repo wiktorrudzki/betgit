@@ -14,7 +14,7 @@ const Ranking = ({ changeRoute }: Props) => {
   useEffect(() => {
     changeRoute("/ranking");
 
-    Axios.get("http://localhost:3001/").then((res: any) => {
+    Axios.get("http://localhost:3001/user/").then((res: any) => {
       if (res.data.get) {
         setAllUsers(
           res.data.data.sort((a: User, b: User) => b.points - a.points)

@@ -8,7 +8,7 @@ type Props = {
   match: Match;
 };
 
-const ChangeScoreUser = ({ match }: Props) => {
+const BetMatch = ({ match }: Props) => {
   const [currentScore, dispatchCurrentScore] = useReducer(
     currentScoreReducer,
     match
@@ -19,12 +19,13 @@ const ChangeScoreUser = ({ match }: Props) => {
   const addScore = (e: React.FormEvent) => {
     e.preventDefault();
 
-    Axios.post(
-      "http://localhost:3001/matches/changeScoreUser",
+    Axios.patch(
+      "http://localhost:3001/types/bet",
       {
-        id: match.id,
+        matchId: match.id,
         team1_score: currentScore.team1_score,
         team2_score: currentScore.team2_score,
+        userId: localStorage.getItem("user"),
       },
       {
         headers: {
@@ -32,7 +33,11 @@ const ChangeScoreUser = ({ match }: Props) => {
         },
       }
     ).then((res) => {
-      console.log(res.data.message);
+      if (res.data.bet) {
+        console.log(res.data.message);
+      } else {
+        console.log(res.data.message);
+      }
     });
   };
 
@@ -86,4 +91,4 @@ const ChangeScoreUser = ({ match }: Props) => {
   );
 };
 
-export default ChangeScoreUser;
+export default BetMatch;

@@ -64,7 +64,7 @@ const Login = ({ changeRoute }: Props) => {
   const submitForm = (e: React.FormEvent) => {
     e.preventDefault();
 
-    Axios.post("http://localhost:3001/login", {
+    Axios.post("http://localhost:3001/user/login", {
       username: loginStatus.username,
       password: loginStatus.password,
     }).then((res) => {

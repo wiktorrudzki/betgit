@@ -109,13 +109,13 @@ const Register = ({ changeRoute }: Props) => {
       return;
     }
 
-    Axios.post("http://localhost:3001/register", {
+    Axios.post("http://localhost:3001/user/register", {
       username: registerStatus.username,
       password: registerStatus.password,
       confirmPassword: registerStatus.confirmPassword,
     }).then((res) => {
       if (res.data.created) {
-        Axios.post("http://localhost:3001/login", {
+        Axios.post("http://localhost:3001/user/login", {
           username: registerStatus.username,
           password: registerStatus.password,
         }).then((res) => {

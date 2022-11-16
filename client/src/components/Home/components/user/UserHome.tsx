@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import { Match } from "../types/Match";
-import ChangeScoreUser from "./components/ChangeScoreUser";
+import BetMatch from "./components/BetMatch";
 
 const UserHome = () => {
   const [matchesToBet, setMatchesToBet] = useState<Match[]>([]);
@@ -29,7 +29,7 @@ const UserHome = () => {
       <h2 className="admin-form-title">Wprowadź wyniki meczów</h2>
       <div className="change-score-wrapper">
         {matchesToBet.map((match) => {
-          return <ChangeScoreUser key={match.id} match={match} />;
+          return <BetMatch key={match.id} match={match} />;
         })}
       </div>
     </div>

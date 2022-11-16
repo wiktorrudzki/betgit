@@ -42,7 +42,7 @@ const AdminHome = () => {
       }
     ).then((res) => {
       if (res.data.added) {
-        Axios.get("http://localhost:3001/").then((response) => {
+        Axios.get("http://localhost:3001/user/").then((response) => {
           if (response.data.get) {
             response.data.data.forEach((user: User) => {
               Axios.post(

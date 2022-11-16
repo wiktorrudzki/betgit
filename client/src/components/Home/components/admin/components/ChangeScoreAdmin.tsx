@@ -19,7 +19,25 @@ const ChangeScoreAdmin = ({ match }: Props) => {
     Axios.post(
       "http://localhost:3001/matches/changeScore",
       {
-        id: match.id,
+        matchId: match.id,
+        team1_score: currentScore.team1_score,
+        team2_score: currentScore.team2_score,
+      },
+      {
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      }
+    ).then((res) => {
+      console.log(res.data.message);
+    });
+
+    Axios.post(
+      "http://localhost:3001/types/setScore",
+      {
+        matchId: match.id,
+        team1: currentScore.team1,
+        team2: currentScore.team2,
         team1_score: currentScore.team1_score,
         team2_score: currentScore.team2_score,
       },
