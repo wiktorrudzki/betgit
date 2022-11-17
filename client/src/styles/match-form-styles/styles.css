@@ -7,12 +7,14 @@
 body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 .App {
   margin: 0;
   padding: 0;
   width: 100%;
+  overflow-x: hidden;
 }
 
 :root {
@@ -63,11 +65,17 @@ body {
 
 .change-score-form {
   width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1em;
+}
+
+.change-score-form-child {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 1em;
+  text-align: center;
 }
 
 .team-score-div {
@@ -80,5 +88,28 @@ body {
 @media (max-width: 1024px) {
   .admin-form-title {
     font-size: 1.25em;
+  }
+}
+@media (max-width: 786px) {
+  .admin-form-div {
+    width: 80%;
+  }
+  .change-score-wrapper {
+    gap: 4.5em;
+  }
+  .change-score-form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "change-score-form-child-teams change-score-form-child-time" "change-score-form-child-input change-score-form-child-btn";
+    gap: 0em;
+  }
+  .change-score-form-child {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 }/*# sourceMappingURL=styles.css.map */

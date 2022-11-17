@@ -1,4 +1,4 @@
-type NewMatchStatus = {
+export type NewMatchStatus = {
   team1: string;
   team2: string;
   matchTime: null | Date;

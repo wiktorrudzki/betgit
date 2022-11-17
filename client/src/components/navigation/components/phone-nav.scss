@@ -1,0 +1,116 @@
+@import "../../../styles/styles";
+
+.phone-nav {
+  color: var(--black);
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 50%;
+  height: 100vh;
+  background-color: var(--white);
+  z-index: 1;
+  transform: translateX(0%);
+  opacity: 0;
+  padding-top: 15vh;
+  padding-bottom: 3vh;
+}
+
+@keyframes animate-nav {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+}
+
+@keyframes hide-nav {
+  from {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 0;
+  }
+}
+
+.ul-phone {
+  margin: 0;
+  list-style: none;
+  width: 100%;
+  height: 100%;
+  @include flex(column, space-between, flex-start);
+  padding: 0em 2.5em;
+  overflow: hidden;
+  padding: 0.5em 4em;
+}
+
+.li-phone {
+  @include flex(column, center, flex-start);
+  gap: 2em;
+}
+
+.link {
+  text-decoration: none;
+  color: #000;
+  position: relative;
+  font-size: 1em;
+}
+
+.link:visited,
+.link:active {
+  text-decoration: none;
+  color: #000;
+}
+
+.link::after {
+  transition: 0.5s ease-in-out;
+  content: "";
+  position: relative;
+  width: 0%;
+  bottom: -4px;
+  height: 3px;
+  display: block;
+  background-color: var(--primary);
+  margin: auto;
+  z-index: 3;
+}
+
+.link:hover::after {
+  width: 100%;
+}
+
+.link-active {
+  text-decoration: none;
+  color: #000;
+  position: relative;
+  font-size: 1em;
+}
+
+.link-active:visited,
+.link-active:active {
+  text-decoration: none;
+  color: #000;
+}
+
+.link-active::after {
+  transition: 0.5s ease-in-out;
+  content: "";
+  position: relative;
+  width: 100%;
+  bottom: -4px;
+  height: 3px;
+  display: block;
+  background-color: var(--primary);
+  margin: auto;
+}
+
+.nav-user-wrapper {
+  gap: 0.3em;
+}
+.nav-user-wrapper > h3 {
+  font-size: 0.9em;
+}

@@ -12,7 +12,7 @@ const Logout = ({ changeRoute }: Props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    changeRoute("/wyloguj");
+    changeRoute("/wylogowanie");
     //eslint-disable-next-line
   }, []);
 

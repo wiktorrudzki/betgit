@@ -1,15 +1,27 @@
-import { useEffect, useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useRoute } from "../../hooks/useRoute";
-import { useUser } from "../../hooks/useUser";
-import userIcon from "../../images/user.svg";
-import PhoneNav from "./components/PhoneNav";
-import "./styles.css";
+import { useRoute } from "../../../hooks/useRoute";
+import { useUser } from "../../../hooks/useUser";
+import userIcon from "../../../images/user.svg";
+import barsIcon from "../../../images/bars.svg";
+import xIcon from "../../../images/x.svg";
+import "./phone-nav.css";
 
-const Nav = () => {
+const PhoneNav = () => {
   const { currentRoute } = useRoute();
   const { currentUser } = useUser();
-  const [phoneScreen, setPhoneScreen] = useState(false);
+
+  const [showMenu, setShowMenu] = useState(false);
+  const phoneNavRef = useRef<null | HTMLDivElement>(null);
+
+  useEffect(() => {
+    setShowMenu(false);
+    if (phoneNavRef.current) {
+      phoneNavRef.current.style.animation =
+        "hide-nav 0.8s ease-in-out forwards";
+    }
+    //eslint-disable-next-line
+  }, [currentRoute]);
 
   const checkRoute = (route: string) => {
     if (route === "/") {
@@ -19,40 +31,39 @@ const Nav = () => {
     }
   };
 
-  useEffect(() => {
-    function handleWindowResize() {
-      if (getWindowSize().innerWidth > 786) setPhoneScreen(true);
-      else setPhoneScreen(false);
-      setWindowSize(getWindowSize());
-    }
-
-    window.addEventListener("resize", handleWindowResize);
-
-    if (windowSize.innerWidth < 786) setPhoneScreen(false);
-    else setPhoneScreen(true);
-
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-    //eslint-disable-next-line
-  }, []);
-
-  const [windowSize, setWindowSize] = useState(getWindowSize());
-
-  function getWindowSize() {
-    const { innerWidth, innerHeight } = window;
-    return { innerWidth, innerHeight };
-  }
-
   return (
-    <nav className="nav">
-      {phoneScreen ? (
-        <ul className="ul">
-          <li className="li">
-            <Link to="/" className="logo">
-              Betgit
-            </Link>
-
+    <ul className="ul">
+      <li className="li">
+        <Link to="/" className="logo">
+          Betgit
+        </Link>
+      </li>
+      <li className="li">
+        <img
+          onClick={() => {
+            setShowMenu((prev) => !prev);
+            if (phoneNavRef.current) {
+              if (showMenu) {
+                phoneNavRef.current.style.animation =
+                  "hide-nav 0.8s ease-in-out forwards";
+              } else {
+                phoneNavRef.current.style.animation =
+                  "animate-nav 0.8s ease-in-out forwards";
+              }
+            }
+          }}
+          className="bars-icon"
+          src={showMenu ? xIcon : barsIcon}
+          alt="menu toggler"
+        />
+      </li>
+      <div
+        ref={phoneNavRef}
+        className="phone-nav"
+        // ${showMenu ? "nav-animation" : ""}
+      >
+        <ul className="ul-phone">
+          <li className="li-phone">
             <Link
               to="/"
               className={`${checkRoute("/") ? "link-active" : "link"}`}
@@ -79,10 +90,10 @@ const Nav = () => {
             </Link>
           </li>
           {currentUser !== null ? (
-            <li className="li">
+            <li className="li-phone">
               <div className="nav-user-wrapper">
                 <img
-                  style={{ width: "1.5em" }}
+                  style={{ width: "1.2em" }}
                   src={userIcon}
                   alt="user icon"
                 />
@@ -98,7 +109,7 @@ const Nav = () => {
               </Link>
             </li>
           ) : (
-            <li className="li">
+            <li className="li-phone">
               <Link
                 to="/logowanie"
                 className={`${
@@ -118,11 +129,9 @@ const Nav = () => {
             </li>
           )}
         </ul>
-      ) : (
-        <PhoneNav />
-      )}
-    </nav>
+      </div>
+    </ul>
   );
 };
 
-export default Nav;
+export default PhoneNav;

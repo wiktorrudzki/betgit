@@ -32,8 +32,14 @@
 
 .change-score-form {
   width: 100%;
-  @include flex(row, space-between);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 1em;
+}
+
+.change-score-form-child {
+  @include flex;
+  text-align: center;
 }
 
 .team-score-div {
@@ -43,5 +49,29 @@
 @media (max-width: 1024px) {
   .admin-form-title {
     font-size: 1.25em;
+  }
+}
+
+@media (max-width: 786px) {
+  .admin-form-div {
+    width: 80%;
+  }
+  .change-score-wrapper {
+    gap: 4.5em;
+  }
+  .change-score-form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "change-score-form-child-teams change-score-form-child-time"
+      "change-score-form-child-input change-score-form-child-btn";
+    gap: 0em;
+  }
+
+  .change-score-form-child {
+    @include flex;
+    text-align: center;
   }
 }
