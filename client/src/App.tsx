@@ -19,7 +19,8 @@ function App() {
   const { setCurrentUser } = useUser();
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/user/remember", {
+    // http://localhost:3001/api/user/remember https://betgit.wiktorrudzki.pl/api/user/remember
+    Axios.get(`http://localhost:3001/api/user/remember`, {
       headers: {
         authorization: localStorage.getItem("token"),
       },

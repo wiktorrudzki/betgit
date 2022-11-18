@@ -3,12 +3,14 @@ import Axios from "axios";
 import { currentScoreReducer } from "../../reducer/currentScoreReducer";
 import { Match } from "../../types/Match";
 import SetScoreForm from "../../../../SetScoreForm";
+import { Type } from "../types";
 
 type Props = {
   match: Match;
+  type: Type | undefined;
 };
 
-const BetMatch = ({ match }: Props) => {
+const BetMatch = ({ match, type }: Props) => {
   const [currentScore, dispatchCurrentScore] = useReducer(
     currentScoreReducer,
     match
@@ -18,12 +20,13 @@ const BetMatch = ({ match }: Props) => {
     e.preventDefault();
 
     Axios.patch(
-      "http://localhost:3001/types/bet",
+      `http://localhost:3001/api/types/bet`,
       {
         matchId: match.id,
         team1_score: currentScore.team1_score,
         team2_score: currentScore.team2_score,
         userId: localStorage.getItem("user"),
+        time: match.match_time,
       },
       {
         headers: {
@@ -45,6 +48,7 @@ const BetMatch = ({ match }: Props) => {
       dispatch={dispatchCurrentScore}
       currentScore={currentScore}
       onSubmit={addScore}
+      type={type}
     />
   );
 };

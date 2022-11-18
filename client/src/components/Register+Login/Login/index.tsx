@@ -64,7 +64,7 @@ const Login = ({ changeRoute }: Props) => {
   const submitForm = (e: React.FormEvent) => {
     e.preventDefault();
 
-    Axios.post("http://localhost:3001/user/login", {
+    Axios.post(`http://localhost:3001/api/user/login`, {
       username: loginStatus.username,
       password: loginStatus.password,
     }).then((res) => {
@@ -79,6 +79,7 @@ const Login = ({ changeRoute }: Props) => {
         localStorage.setItem("user", res.data.id);
         navigate("/");
       } else {
+        console.log(res);
         dispatchLoginStatus({
           type: "error",
           payload: true,

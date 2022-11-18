@@ -82,11 +82,13 @@ const Nav = () => {
             <li className="li">
               <div className="nav-user-wrapper">
                 <img
-                  style={{ width: "1.5em" }}
+                  style={{ width: "1.5em", padding: "0", margin: "0" }}
                   src={userIcon}
                   alt="user icon"
                 />
-                <h3>{currentUser.username}</h3>
+                <h3 style={{ padding: "0", margin: "0" }}>
+                  {currentUser.username}
+                </h3>
               </div>
               <Link
                 to="/wylogowanie"

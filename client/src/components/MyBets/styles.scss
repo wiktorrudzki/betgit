@@ -1,0 +1,55 @@
+@import "../../styles/styles";
+
+.myBets-page {
+  @include flex;
+  background-color: var(--gray);
+  padding: 2em 0;
+}
+
+.mybets-wrapper {
+  @include flex(column);
+  gap: 3em;
+  width: 50%;
+  background-color: var(--white);
+  border-radius: 12px;
+}
+
+.mybets-title {
+  width: 100%;
+  font-size: 1.8em;
+  border-bottom: 2px solid var(--gray);
+  padding: 1em 2em;
+  text-align: center;
+  margin: 0;
+}
+
+.mybets-columns-title {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  list-style: none;
+  padding: 0;
+}
+
+.mybets-columns-title-child {
+  padding: 0;
+  margin: 0;
+  @include flex;
+  font-size: 1.5em;
+}
+
+.mybets-row-wrapper {
+  width: 100%;
+}
+
+.mybets-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.mybets-row-child {
+  padding: 0;
+  margin: 0;
+  @include flex;
+}

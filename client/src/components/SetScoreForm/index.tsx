@@ -1,15 +1,23 @@
 import { useUser } from "../../hooks/useUser";
 import { CurrentScoreActions } from "../Home/components/reducer/currentScoreReducer";
 import { Match } from "../Home/components/types/Match";
+import { Type } from "../Home/components/user/types";
 
 type Props = {
   match: Match;
   dispatch: React.Dispatch<CurrentScoreActions>;
   currentScore: Match;
   onSubmit: (e: React.FormEvent) => void;
+  type?: Type;
 };
 
-const SetScoreForm = ({ match, dispatch, currentScore, onSubmit }: Props) => {
+const SetScoreForm = ({
+  match,
+  dispatch,
+  currentScore,
+  onSubmit,
+  type,
+}: Props) => {
   const { currentUser } = useUser();
 
   return (
@@ -22,6 +30,11 @@ const SetScoreForm = ({ match, dispatch, currentScore, onSubmit }: Props) => {
       </span>
       <div className="change-score-form-child change-score-form-child-input">
         <input
+          placeholder={
+            type && type?.team1_score !== null
+              ? type.team1_score.toString()
+              : ""
+          }
           style={{ width: "3em" }}
           className="form-input"
           onChange={(e) => {
@@ -34,6 +47,11 @@ const SetScoreForm = ({ match, dispatch, currentScore, onSubmit }: Props) => {
         />
         <span style={{ margin: "0 0.5em" }}> : </span>
         <input
+          placeholder={
+            type && type?.team2_score !== null
+              ? type.team2_score.toString()
+              : ""
+          }
           style={{ width: "3em" }}
           className="form-input"
           onChange={(e) => {
@@ -55,6 +73,11 @@ const SetScoreForm = ({ match, dispatch, currentScore, onSubmit }: Props) => {
               ? "disable-submit-btn"
               : ""
           }`}
+          disabled={
+            currentScore.team1_score == null ||
+            currentScore.team2_score == null ||
+            currentUser === null
+          }
           onClick={onSubmit}
           type="submit"
         >

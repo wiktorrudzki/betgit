@@ -1,11 +1,10 @@
 const mysql = require("mysql");
 
 const db = mysql.createConnection({
-  host: "localhost",
-  port: "3306",
-  user: "root",
-  password: process.env.MYSQL_PASSWORD,
-  database: "betgit",
+  host: "s7.cyber-folks.pl",
+  user: "rumvgsauoa_wiktor",
+  password: process.env.DATABASE_PASSWORD,
+  database: "rumvgsauoa_betgit",
 });
 
 module.exports = { db };

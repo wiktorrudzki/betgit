@@ -6,6 +6,7 @@ import { newMatchReducer } from "./reducer/newMatchReducer";
 import { Match } from "../types/Match";
 import ChangeScoreAdmin from "./components/ChangeScoreAdmin";
 import { User } from "../../../Ranking/types";
+import { Type } from "../user/types";
 
 const AdminHome = () => {
   const [newMatchStatus, dispatchNewMatchStatus] = useReducer(newMatchReducer, {
@@ -15,6 +16,7 @@ const AdminHome = () => {
   });
 
   const [allMatches, setAllMatches] = useState<Match[]>([]);
+  const [allCorrectTypes, setAllCorrectTypes] = useState<Type[]>([]);
   const [showMatchesAfter, setShowMatchesAfter] = useState<string | null>(null);
 
   const addMatch = (e: React.FormEvent) => {
@@ -29,7 +31,7 @@ const AdminHome = () => {
     }
 
     Axios.post(
-      "http://localhost:3001/matches/add",
+      `http://localhost:3001/api/matches/add`,
       {
         team1: newMatchStatus.team1,
         team2: newMatchStatus.team2,
@@ -42,11 +44,11 @@ const AdminHome = () => {
       }
     ).then((res) => {
       if (res.data.added) {
-        Axios.get("http://localhost:3001/user/").then((response) => {
+        Axios.get(`http://localhost:3001/api/user/`).then((response) => {
           if (response.data.get) {
             response.data.data.forEach((user: User) => {
               Axios.post(
-                "http://localhost:3001/types/add",
+                `https://betgit.wiktorrudzki.pl/api/types/add`,
                 {
                   team1: newMatchStatus.team1,
                   team2: newMatchStatus.team2,
@@ -59,6 +61,7 @@ const AdminHome = () => {
                   },
                 }
               ).then((re) => {
+                console.log(re);
                 if (!re.data.added) {
                   console.log(re.data.message);
                 }
@@ -82,12 +85,23 @@ const AdminHome = () => {
   }, []);
 
   const getMatches = () => {
-    Axios.get("http://localhost:3001/matches/", {
+    Axios.get(`http://localhost:3001/api/matches/`, {
       headers: {
         minDate: showMatchesAfter,
       },
     }).then((res) => {
       if (res.data.got) {
+        Axios.get(`http://localhost:3001/api/correctTypes`, {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }).then((response) => {
+          if (response.data.get) {
+            setAllCorrectTypes(response.data.data);
+          } else {
+            console.log(response.data.message);
+          }
+        });
         setAllMatches(res.data.data);
       } else {
         console.log(res.data.message);
@@ -175,7 +189,8 @@ const AdminHome = () => {
             Filtruj
           </button>
           {allMatches.map((match) => {
-            return <ChangeScoreAdmin key={match.id} match={match} />;
+            let correctType = allCorrectTypes.find((type) => match.id === type.match_id);
+            return <ChangeScoreAdmin key={match.id} match={match} correctType={correctType} />;
           })}
         </div>
       </div>

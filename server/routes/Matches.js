@@ -1,14 +1,13 @@
 const { db } = require("../config");
 const { verifyJWT } = require("../middlewares/verifyJwt");
 
-const { addHours } = require("date-fns");
 const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
   const date = req.headers["mindate"];
 
-  const dbSelect = "SELECT * FROM betgit.matches";
+  const dbSelect = "SELECT * FROM matches";
 
   db.query(dbSelect, [], (err, result) => {
     if (err) {
@@ -17,7 +16,7 @@ router.get("/", (req, res) => {
       if (date) {
         if (date === "now") {
           result = result.filter((match) => {
-            return addHours(match.match_time, 1) > Date.now();
+            return match.match_time > Date.now();
           });
           res.json({
             got: true,
@@ -26,7 +25,7 @@ router.get("/", (req, res) => {
           });
         } else {
           result = result.filter((match) => {
-            return addHours(match.match_time, 1) > addHours(new Date(date), 1);
+            return match.match_time > new Date(date);
           });
           res.json({
             got: true,
@@ -53,7 +52,7 @@ router.post("/add", verifyJWT, (req, res) => {
   match_time = match_time.slice(0, 19);
 
   const dbInsert =
-    "INSERT INTO betgit.matches (team1, team2, match_time) VALUES (?, ?, ?)";
+    "INSERT INTO matches (team1, team2, match_time) VALUES (?, ?, ?)";
 
   db.query(dbInsert, [team1, team2, match_time], (err, result) => {
     if (err) {
@@ -74,7 +73,7 @@ router.post("/changeScore", verifyJWT, (req, res) => {
   const id = req.body.id;
 
   const dbInsert =
-    "UPDATE betgit.matches SET team1_score = ?, team2_score = ? WHERE id = ?;";
+    "UPDATE matches SET team1_score = ?, team2_score = ? WHERE id = ?;";
 
   db.query(dbInsert, [team1_score, team2_score, id], (err, result) => {
     if (err) {

@@ -34,7 +34,7 @@ router.post(
       if (err) {
         return res.json({ created: false, message: "error while adding user" });
       } else {
-        const dbSelect = "SELECT * FROM betgit.users WHERE username = ?";
+        const dbSelect = "SELECT * FROM users WHERE username = ?";
 
         db.query(dbSelect, username, (err, result) => {
           if (err) {
@@ -49,7 +49,7 @@ router.post(
             });
           } else {
             const insertDB =
-              "INSERT INTO betgit.users (username, password, admin, points) VALUES (?, ?, ?, ?);";
+              "INSERT INTO users (username, password, admin, points) VALUES (?, ?, ?, ?);";
 
             db.query(insertDB, [username, hash, false, 0], (err, result) => {
               if (err) {
@@ -71,9 +71,7 @@ router.post(
 router.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
-
-  const dbSelect = "SELECT * FROM betgit.users WHERE username = ?";
-
+  const dbSelect = "SELECT * FROM users WHERE username = ?";
   db.query(dbSelect, username, (err, result) => {
     if (err) {
       return res.json({
@@ -116,11 +114,15 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-  const dbSelect = "SELECT * FROM betgit.users WHERE admin = false;";
+  const dbSelect = "SELECT * FROM users WHERE admin = false;";
 
   db.query(dbSelect, [], (err, result) => {
     if (err) {
-      res.json({ get: false, message: "error while getting users" });
+      res.json({
+        get: false,
+        message: "error while getting users",
+        err: err,
+      });
     } else {
       const data = result.map((user) => {
         return { username: user.username, points: user.points, id: user.id };
@@ -137,7 +139,7 @@ router.get("/remember", verifyJWT, (req, res) => {
     return res.json({ auth: false, message: "didnt have user id" });
   }
 
-  db.query("SELECT * FROM betgit.users WHERE id = ?", id, (err, result) => {
+  db.query("SELECT * FROM users WHERE id = ?", id, (err, result) => {
     if (result && result.length > 0) {
       res.json({
         auth: true,
@@ -148,6 +150,21 @@ router.get("/remember", verifyJWT, (req, res) => {
       });
     } else {
       res.send({ auth: false, message: "didnt find a user" });
+    }
+  });
+});
+
+router.patch("/addPoints", verifyJWT, (req, res) => {
+  const points = req.body.points;
+  const userId = req.body.userId;
+
+  const updateDb = "UPDATE users SET points = points + ? WHERE id = ?";
+
+  db.query(updateDb, [points, userId], (err, result) => {
+    if (err) {
+      res.json({ added: false, message: "error while adding points" });
+    } else {
+      res.json({ added: true, message: "successfully added points" });
     }
   });
 });

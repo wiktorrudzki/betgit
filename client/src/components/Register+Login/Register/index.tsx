@@ -2,6 +2,7 @@ import Axios from "axios";
 import React, { useEffect, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser";
+import { Match } from "../../Home/components/types/Match";
 import "../styles.css";
 import Wrapper from "../Wrapper";
 
@@ -109,23 +110,47 @@ const Register = ({ changeRoute }: Props) => {
       return;
     }
 
-    Axios.post("http://localhost:3001/user/register", {
+    Axios.post(`http://localhost:3001/api/user/register`, {
       username: registerStatus.username,
       password: registerStatus.password,
       confirmPassword: registerStatus.confirmPassword,
     }).then((res) => {
       if (res.data.created) {
-        Axios.post("http://localhost:3001/user/login", {
+        Axios.post(`http://localhost:3001/api/user/login`, {
           username: registerStatus.username,
           password: registerStatus.password,
-        }).then((res) => {
+        }).then((response) => {
           setCurrentUser({
-            username: res.data.username,
-            id: res.data.id,
-            isAdmin: res.data.isAdmin,
+            username: response.data.username,
+            id: response.data.id,
+            isAdmin: response.data.isAdmin,
           });
-          localStorage.setItem("token", "Bearer " + res.data.token);
-          localStorage.setItem("user", res.data.id);
+          localStorage.setItem("token", "Bearer " + response.data.token);
+          localStorage.setItem("user", response.data.id);
+          Axios.get("http://localhost:3001/api/matches/", {
+            headers: {
+              minDate: "now",
+            },
+          }).then((result) => {
+            result.data.data.forEach((match: Match) => {
+              Axios.post(
+                "http://localhost:3001/api/types/add",
+                {
+                  team1: match.team1,
+                  team2: match.team2,
+                  matchId: match.id,
+                  userId: localStorage.getItem("user"),
+                },
+                {
+                  headers: {
+                    authorization: localStorage.getItem("token"),
+                  },
+                }
+              ).then((res) => {
+                console.log(res);
+              });
+            });
+          });
         });
         dispatchRegisterStatus({ type: "clear" });
         navigate("/");
