@@ -10,20 +10,22 @@ const UserHome = () => {
 
   useEffect(() => {
     getMatches();
+    //eslint-disable-next-line
   }, []);
 
   const getMatches = () => {
-    Axios.get(`http://localhost:3001/api/matches/`, {
+    Axios.get(`https://betgit.wiktorrudzki.pl/api/matches/`, {
       headers: {
         minDate: "now",
       },
     }).then((res) => {
       if (res.data.got) {
-        Axios.get("http://localhost:3001/api/types/", {
+        Axios.get("https://betgit.wiktorrudzki.pl/api/types/", {
           headers: {
             userId: localStorage.getItem("user"),
           },
         }).then((response) => {
+          console.timeLog(response.data.get);
           if (response.data.get) {
             setUserTypes(response.data.data);
           } else {
@@ -32,7 +34,7 @@ const UserHome = () => {
         });
         setMatchesToBet(res.data.data);
       } else {
-        console.log(`https://betgit.wiktorrudzki.pl/api/matches/`);
+        console.log(res.data.message);
       }
     });
   };

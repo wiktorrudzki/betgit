@@ -14,7 +14,7 @@ const Ranking = ({ changeRoute }: Props) => {
   useEffect(() => {
     changeRoute("/ranking");
 
-    Axios.get(`http://localhost:3001/api/user/`).then((res: any) => {
+    Axios.get(`https://betgit.wiktorrudzki.pl/api/user/`).then((res: any) => {
       if (res.data.get) {
         setAllUsers(
           res.data.data.sort((a: User, b: User) => b.points - a.points)

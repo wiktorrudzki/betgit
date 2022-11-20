@@ -31,7 +31,7 @@ const AdminHome = () => {
     }
 
     Axios.post(
-      `http://localhost:3001/api/matches/add`,
+      `https://betgit.wiktorrudzki.pl/api/matches/add`,
       {
         team1: newMatchStatus.team1,
         team2: newMatchStatus.team2,
@@ -44,7 +44,7 @@ const AdminHome = () => {
       }
     ).then((res) => {
       if (res.data.added) {
-        Axios.get(`http://localhost:3001/api/user/`).then((response) => {
+        Axios.get(`https://betgit.wiktorrudzki.pl/api/user/`).then((response) => {
           if (response.data.get) {
             response.data.data.forEach((user: User) => {
               Axios.post(
@@ -85,13 +85,13 @@ const AdminHome = () => {
   }, []);
 
   const getMatches = () => {
-    Axios.get(`http://localhost:3001/api/matches/`, {
+    Axios.get(`https://betgit.wiktorrudzki.pl/api/matches/`, {
       headers: {
         minDate: showMatchesAfter,
       },
     }).then((res) => {
       if (res.data.got) {
-        Axios.get(`http://localhost:3001/api/correctTypes`, {
+        Axios.get(`https://betgit.wiktorrudzki.pl/api/correctTypes`, {
           headers: {
             authorization: localStorage.getItem("token"),
           },

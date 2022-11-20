@@ -11,9 +11,9 @@ router.post("/add", verifyJWT, (req, res) => {
   const userId = req.body.userId;
 
   const dbInsert =
-    "INSERT INTO types (team1, team2, match_id, user_id, points) VALUES (?, ?, ?, ?, ?)";
+    "INSERT INTO types (team1, team2, match_id, user_id) VALUES (?, ?, ?, ?)";
 
-  db.query(dbInsert, [team1, team2, matchId, userId, 0], (err, result) => {
+  db.query(dbInsert, [team1, team2, matchId, userId], (err, result) => {
     if (err) {
       res.json({ added: false, message: "error while adding type" });
     } else {

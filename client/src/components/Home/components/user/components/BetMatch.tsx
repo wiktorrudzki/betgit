@@ -16,11 +16,15 @@ const BetMatch = ({ match, type }: Props) => {
     match
   );
 
+  const refreshPage = () => {
+    window.location.reload();
+  };
+
   const addScore = (e: React.FormEvent) => {
     e.preventDefault();
 
     Axios.patch(
-      `http://localhost:3001/api/types/bet`,
+      `https://betgit.wiktorrudzki.pl/api/types/bet`,
       {
         matchId: match.id,
         team1_score: currentScore.team1_score,
@@ -35,7 +39,7 @@ const BetMatch = ({ match, type }: Props) => {
       }
     ).then((res) => {
       if (res.data.bet) {
-        console.log(res.data.message);
+        refreshPage();
       } else {
         console.log(res.data.message);
       }

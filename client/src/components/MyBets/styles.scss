@@ -9,7 +9,7 @@
 .mybets-wrapper {
   @include flex(column);
   gap: 3em;
-  width: 50%;
+  width: 70%;
   background-color: var(--white);
   border-radius: 12px;
 }
@@ -46,10 +46,73 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  margin: 2em 0;
 }
 
 .mybets-row-child {
   padding: 0;
   margin: 0;
   @include flex;
+  flex-wrap: wrap;
+}
+
+.mybets-row-child > h4 {
+  overflow-wrap: break-word;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .mybets-wrapper {
+    width: 80%;
+  }
+  .mybets-columns-title {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+  .mybets-title {
+    font-size: 1.5em;
+  }
+  .mybets-columns-title-child {
+    font-size: 1.2em;
+  }
+  .mybets-row {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 786px) {
+  .mybets-wrapper {
+    width: 90%;
+    gap: 2em;
+  }
+  .mybets-columns-title {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+  .mybets-title {
+    font-size: 1.4em;
+  }
+  .mybets-columns-title-child {
+    font-size: 1.1em;
+  }
+  .mybets-row {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .mybets-wrapper {
+    width: 90%;
+    gap: 2em;
+  }
+  .mybets-columns-title {
+    grid-template-columns: 2.5fr 1fr 1fr;
+  }
+  .mybets-title {
+    font-size: 1.2em;
+  }
+  .mybets-columns-title-child {
+    font-size: 1em;
+  }
+  .mybets-row {
+    grid-template-columns: 2.5fr 1fr 1fr;
+  }
 }

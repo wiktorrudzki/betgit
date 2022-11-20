@@ -110,13 +110,13 @@ const Register = ({ changeRoute }: Props) => {
       return;
     }
 
-    Axios.post(`http://localhost:3001/api/user/register`, {
+    Axios.post(`https://betgit.wiktorrudzki.pl/api/user/register`, {
       username: registerStatus.username,
       password: registerStatus.password,
       confirmPassword: registerStatus.confirmPassword,
     }).then((res) => {
       if (res.data.created) {
-        Axios.post(`http://localhost:3001/api/user/login`, {
+        Axios.post(`https://betgit.wiktorrudzki.pl/api/user/login`, {
           username: registerStatus.username,
           password: registerStatus.password,
         }).then((response) => {
@@ -127,14 +127,14 @@ const Register = ({ changeRoute }: Props) => {
           });
           localStorage.setItem("token", "Bearer " + response.data.token);
           localStorage.setItem("user", response.data.id);
-          Axios.get("http://localhost:3001/api/matches/", {
+          Axios.get("https://betgit.wiktorrudzki.pl/api/matches/", {
             headers: {
               minDate: "now",
             },
           }).then((result) => {
             result.data.data.forEach((match: Match) => {
               Axios.post(
-                "http://localhost:3001/api/types/add",
+                "https://betgit.wiktorrudzki.pl/api/types/add",
                 {
                   team1: match.team1,
                   team2: match.team2,

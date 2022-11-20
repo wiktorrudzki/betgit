@@ -16,10 +16,6 @@ const PhoneNav = () => {
 
   useEffect(() => {
     setShowMenu(false);
-    if (phoneNavRef.current) {
-      phoneNavRef.current.style.animation =
-        "hide-nav 0.8s ease-in-out forwards";
-    }
     //eslint-disable-next-line
   }, [currentRoute]);
 
@@ -31,10 +27,17 @@ const PhoneNav = () => {
     }
   };
 
+  const hideMenu = () => {
+    if (phoneNavRef.current) {
+      phoneNavRef.current.style.animation =
+        "hide-nav 0.8s ease-in-out forwards";
+    }
+  };
+
   return (
     <ul className="ul">
       <li className="li">
-        <Link to="/" className="logo">
+        <Link onClick={hideMenu} to="/" className="logo">
           Betgit
         </Link>
       </li>
@@ -65,6 +68,7 @@ const PhoneNav = () => {
         <ul className="ul-phone">
           <li className="li-phone">
             <Link
+              onClick={hideMenu}
               to="/"
               className={`${checkRoute("/") ? "link-active" : "link"}`}
             >
@@ -74,6 +78,7 @@ const PhoneNav = () => {
               ""
             ) : (
               <Link
+                onClick={hideMenu}
                 to="/mojeBety"
                 className={`${
                   checkRoute("/mojeBety") ? "link-active" : "link"
@@ -83,6 +88,7 @@ const PhoneNav = () => {
               </Link>
             )}
             <Link
+              onClick={hideMenu}
               to="/ranking"
               className={`${checkRoute("/ranking") ? "link-active" : "link"}`}
             >
@@ -100,6 +106,7 @@ const PhoneNav = () => {
                 <h3>{currentUser.username}</h3>
               </div>
               <Link
+                onClick={hideMenu}
                 to="/wylogowanie"
                 className={`${
                   checkRoute("/wylogowanie") ? "link-active" : "link"
@@ -111,6 +118,7 @@ const PhoneNav = () => {
           ) : (
             <li className="li-phone">
               <Link
+                onClick={hideMenu}
                 to="/logowanie"
                 className={`${
                   checkRoute("/logowanie") ? "link-active" : "link"
@@ -119,6 +127,7 @@ const PhoneNav = () => {
                 Zaloguj się
               </Link>
               <Link
+                onClick={hideMenu}
                 to="/rejestracja"
                 className={`${
                   checkRoute("/rejestracja") ? "link-active" : "link"

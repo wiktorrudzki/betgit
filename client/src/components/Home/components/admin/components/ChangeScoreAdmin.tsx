@@ -19,7 +19,7 @@ const ChangeScoreAdmin = ({ match, correctType }: Props) => {
   );
 
   const sumPoints = (matchId: number) => {
-    Axios.get("http://localhost:3001/api/correctTypes/getByMatchId", {
+    Axios.get("https://betgit.wiktorrudzki.pl/api/correctTypes/getByMatchId", {
       headers: {
         matchId: matchId,
         authorization: localStorage.getItem("token"),
@@ -28,11 +28,11 @@ const ChangeScoreAdmin = ({ match, correctType }: Props) => {
       console.log(res.data.data);
       const correctType = res.data.data;
       if (res.data.taken) {
-        Axios.get("http://localhost:3001/api/user/").then((response) => {
+        Axios.get("https://betgit.wiktorrudzki.pl/api/user/").then((response) => {
           if (response.data.get) {
             response.data.data.forEach((user: User) => {
               Axios.get(
-                "http://localhost:3001/api/types/getByMatchIdAndUserId",
+                "https://betgit.wiktorrudzki.pl/api/types/getByMatchIdAndUserId",
                 {
                   headers: {
                     authorization: localStorage.getItem("token"),
@@ -44,9 +44,8 @@ const ChangeScoreAdmin = ({ match, correctType }: Props) => {
                 if (res.data.taken) {
                   const userType = res.data.data;
                   const points = countPoints(userType, correctType);
-                  if (points === 0) return;
                   Axios.patch(
-                    "http://localhost:3001/api/types/addPoints",
+                    "https://betgit.wiktorrudzki.pl/api/types/addPoints",
                     {
                       matchId: match.id,
                       points: points,
@@ -59,7 +58,7 @@ const ChangeScoreAdmin = ({ match, correctType }: Props) => {
                   ).then((response) => {
                     if (response.data.added) {
                       Axios.patch(
-                        "http://localhost:3001/api/user/addPoints",
+                        "https://betgit.wiktorrudzki.pl/api/user/addPoints",
                         {
                           points: points,
                           userId: user.id,
@@ -92,7 +91,7 @@ const ChangeScoreAdmin = ({ match, correctType }: Props) => {
   const addScore = (e: React.FormEvent) => {
     e.preventDefault();
 
-    Axios.get("http://localhost:3001/api/correctTypes/", {
+    Axios.get("https://betgit.wiktorrudzki.pl/api/correctTypes/", {
       headers: {
         authorization: localStorage.getItem("token"),
       },
@@ -105,7 +104,7 @@ const ChangeScoreAdmin = ({ match, correctType }: Props) => {
         ).length > 0
       ) {
         Axios.patch(
-          `http://localhost:3001/api/correctTypes/add`,
+          `https://betgit.wiktorrudzki.pl/api/correctTypes/add`,
           {
             matchId: match.id,
             team1_score: currentScore.team1_score,
@@ -125,7 +124,7 @@ const ChangeScoreAdmin = ({ match, correctType }: Props) => {
         });
       } else {
         Axios.post(
-          `http://localhost:3001/api/correctTypes/add`,
+          `https://betgit.wiktorrudzki.pl/api/correctTypes/add`,
           {
             matchId: match.id,
             team1: currentScore.team1,

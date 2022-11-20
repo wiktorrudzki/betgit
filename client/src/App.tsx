@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     // http://localhost:3001/api/user/remember https://betgit.wiktorrudzki.pl/api/user/remember
-    Axios.get(`http://localhost:3001/api/user/remember`, {
+    Axios.get(`https://betgit.wiktorrudzki.pl/api/user/remember`, {
       headers: {
         authorization: localStorage.getItem("token"),
       },

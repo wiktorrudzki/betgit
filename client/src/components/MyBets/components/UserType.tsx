@@ -17,7 +17,22 @@ const UserType = ({ type }: Props) => {
         <span> : </span>
         <p>{type.team2_score}</p>
       </div>
-      <div className="mybets-row-points mybets-row-child">{type.points}</div>
+      <div
+        className="mybets-row-points mybets-row-child"
+        style={
+          type.points === 4
+            ? { color: "blue" }
+            : type.points === 3
+            ? { color: "green" }
+            : type.points === 2
+            ? { color: "orange" }
+            : type.points === 0
+            ? { color: "red" }
+            : { color: "black" }
+        }
+      >
+        {type.points}
+      </div>
     </div>
   );
 };

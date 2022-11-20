@@ -15,7 +15,7 @@ const MyBets = ({ changeRoute }: Props) => {
   const [userTypes, setUserTypes] = useState<Type[]>([]);
 
   const getUserTypes = () => {
-    Axios.get("http://localhost:3001/api/types/getByUserId", {
+    Axios.get("https://betgit.wiktorrudzki.pl/api/types/getByUserId", {
       headers: {
         authorization: localStorage.getItem("token"),
         userId: localStorage.getItem("user"),
@@ -23,10 +23,7 @@ const MyBets = ({ changeRoute }: Props) => {
     }).then((res) => {
       if (res.data.taken) {
         setUserTypes(
-          res.data.data.filter(
-            (type: Type) =>
-              type.team1_score !== null && type.team2_score !== null
-          )
+          res.data.data.filter((type: Type) => type.points !== null)
         );
       } else {
         console.log(res.data.message);
@@ -54,12 +51,14 @@ const MyBets = ({ changeRoute }: Props) => {
           </ul>
           <div className="mybets-row-wrapper">
             {userTypes.map((type) => {
-              return <UserType type={type} />;
+              return <UserType key={type.id} type={type} />;
             })}
           </div>
         </div>
       ) : (
-        <div>Zaloguj się aby móc obstawiać i przeglądać swoje bety</div>
+        <div style={{ textAlign: "center" }}>
+          Zaloguj się aby móc obstawiać i przeglądać swoje bety
+        </div>
       )}
     </div>
   );

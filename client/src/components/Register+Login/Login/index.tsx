@@ -61,10 +61,14 @@ const Login = ({ changeRoute }: Props) => {
     errorMessage: "",
   });
 
+  const refreshPage = () => {
+    window.location.reload();
+  };
+
   const submitForm = (e: React.FormEvent) => {
     e.preventDefault();
 
-    Axios.post(`http://localhost:3001/api/user/login`, {
+    Axios.post(`https://betgit.wiktorrudzki.pl/api/user/login`, {
       username: loginStatus.username,
       password: loginStatus.password,
     }).then((res) => {
@@ -78,8 +82,8 @@ const Login = ({ changeRoute }: Props) => {
         localStorage.setItem("token", "Bearer " + res.data.token);
         localStorage.setItem("user", res.data.id);
         navigate("/");
+        refreshPage();
       } else {
-        console.log(res);
         dispatchLoginStatus({
           type: "error",
           payload: true,
