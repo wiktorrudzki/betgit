@@ -2,6 +2,8 @@ import { useUser } from "../../hooks/useUser";
 import { CurrentScoreActions } from "../Home/components/reducer/currentScoreReducer";
 import { Match } from "../Home/components/types/Match";
 import { Type } from "../Home/components/user/types";
+import checkIcon from "../../images/check.svg";
+import "./styles.css";
 
 type Props = {
   match: Match;
@@ -9,6 +11,7 @@ type Props = {
   currentScore: Match;
   onSubmit: (e: React.FormEvent) => void;
   type?: Type;
+  checkIconRef?: React.MutableRefObject<HTMLImageElement | null>;
 };
 
 const SetScoreForm = ({
@@ -17,6 +20,7 @@ const SetScoreForm = ({
   currentScore,
   onSubmit,
   type,
+  checkIconRef,
 }: Props) => {
   const { currentUser } = useUser();
 
@@ -84,6 +88,12 @@ const SetScoreForm = ({
           Dodaj
         </button>
       </div>
+      <img
+        ref={checkIconRef}
+        className="check-icon"
+        src={checkIcon}
+        alt="check icon"
+      />
     </form>
   );
 };

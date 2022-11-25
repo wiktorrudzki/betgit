@@ -1,0 +1,12 @@
+.check-icon {
+  position: absolute;
+  right: 0;
+  width: 2em;
+  display: none;
+}
+
+@media (max-width: 786px) {
+  .check-icon {
+    width: 1.5em;
+  }
+}/*# sourceMappingURL=styles.css.map */

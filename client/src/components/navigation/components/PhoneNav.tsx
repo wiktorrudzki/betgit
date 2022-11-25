@@ -50,6 +50,9 @@ const PhoneNav = () => {
                 phoneNavRef.current.style.animation =
                   "hide-nav 0.8s ease-in-out forwards";
               } else {
+                if (phoneNavRef.current) {
+                  phoneNavRef.current.style.display = "initial";
+                }
                 phoneNavRef.current.style.animation =
                   "animate-nav 0.8s ease-in-out forwards";
               }

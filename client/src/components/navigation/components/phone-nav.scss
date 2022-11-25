@@ -14,6 +14,8 @@
   opacity: 0;
   padding-top: 15vh;
   padding-bottom: 3vh;
+  display: none;
+  overflow-x: hidden;
 }
 
 @keyframes animate-nav {
@@ -46,11 +48,13 @@
   padding: 0em 2.5em;
   overflow: hidden;
   padding: 0.5em 2em;
+  overflow: hidden;
 }
 
 .li-phone {
   @include flex(column, center, flex-start);
   gap: 2em;
+  overflow: hidden;
 }
 
 .link {

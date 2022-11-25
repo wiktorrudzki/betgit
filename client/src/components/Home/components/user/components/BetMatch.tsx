@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useRef } from "react";
 import Axios from "axios";
 import { currentScoreReducer } from "../../reducer/currentScoreReducer";
 import { Match } from "../../types/Match";
@@ -11,14 +11,12 @@ type Props = {
 };
 
 const BetMatch = ({ match, type }: Props) => {
+  const checkIconRef = useRef<null | HTMLImageElement>(null);
+
   const [currentScore, dispatchCurrentScore] = useReducer(
     currentScoreReducer,
     match
   );
-
-  const refreshPage = () => {
-    window.location.reload();
-  };
 
   const addScore = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,7 +37,13 @@ const BetMatch = ({ match, type }: Props) => {
       }
     ).then((res) => {
       if (res.data.bet) {
-        refreshPage();
+        if (checkIconRef.current) {
+          checkIconRef.current.style.display = "initial";
+          setTimeout(() => {
+            if (checkIconRef.current)
+              checkIconRef.current.style.display = "none";
+          }, 2000);
+        }
       } else {
         console.log(res.data.message);
       }
@@ -53,6 +57,7 @@ const BetMatch = ({ match, type }: Props) => {
       currentScore={currentScore}
       onSubmit={addScore}
       type={type}
+      checkIconRef={checkIconRef}
     />
   );
 };

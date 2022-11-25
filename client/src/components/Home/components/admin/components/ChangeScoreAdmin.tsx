@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useRef } from "react";
 import Axios from "axios";
 import { Match } from "../../types/Match";
 import { currentScoreReducer } from "../../reducer/currentScoreReducer";
@@ -13,6 +13,8 @@ type Props = {
 };
 
 const ChangeScoreAdmin = ({ match, correctType }: Props) => {
+  const checkIconRef = useRef<null | HTMLImageElement>(null);
+
   const [currentScore, dispatchCurrentScore] = useReducer(
     currentScoreReducer,
     match
@@ -74,7 +76,15 @@ const ChangeScoreAdmin = ({ match, correctType }: Props) => {
                             },
                           }
                         ).then((res) => {
-                          console.log(res.data.message);
+                          if (res.data.added) {
+                            if (checkIconRef.current) {
+                              checkIconRef.current.style.display = "initial";
+                              setTimeout(() => {
+                                if (checkIconRef.current)
+                                  checkIconRef.current.style.display = "none";
+                              }, 2000);
+                            }
+                          }
                         });
                       }
                     });
@@ -161,6 +171,7 @@ const ChangeScoreAdmin = ({ match, correctType }: Props) => {
       currentScore={currentScore}
       onSubmit={addScore}
       type={correctType}
+      checkIconRef={checkIconRef}
     />
   );
 };
