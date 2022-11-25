@@ -114,12 +114,12 @@ router.get("/getByUserId", verifyJWT, (req, res) => {
 });
 
 router.patch("/addPoints", verifyJWT, (req, res) => {
-  const matchId = req.body.matchId;
+  const id = req.body.id;
   const points = req.body.points;
 
-  const dbInsert = "UPDATE types SET points = ? where match_id = ?";
+  const dbInsert = "UPDATE types SET points = ? where id = ?";
 
-  db.query(dbInsert, [points, matchId], (err, result) => {
+  db.query(dbInsert, [points, id], (err, result) => {
     if (err) {
       res.json({ added: false, message: "error while adding points" });
     } else {

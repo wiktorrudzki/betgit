@@ -28,60 +28,66 @@ const ChangeScoreAdmin = ({ match, correctType }: Props) => {
       console.log(res.data.data);
       const correctType = res.data.data;
       if (res.data.taken) {
-        Axios.get("https://betgit.wiktorrudzki.pl/api/user/").then((response) => {
-          if (response.data.get) {
-            response.data.data.forEach((user: User) => {
-              Axios.get(
-                "https://betgit.wiktorrudzki.pl/api/types/getByMatchIdAndUserId",
-                {
-                  headers: {
-                    authorization: localStorage.getItem("token"),
-                    userId: user.id,
-                    matchId: match.id,
-                  },
-                }
-              ).then((res) => {
-                if (res.data.taken) {
-                  const userType = res.data.data;
-                  const points = countPoints(userType, correctType);
-                  Axios.patch(
-                    "https://betgit.wiktorrudzki.pl/api/types/addPoints",
-                    {
+        Axios.get("https://betgit.wiktorrudzki.pl/api/user/").then(
+          (response) => {
+            if (response.data.get) {
+              response.data.data.forEach((user: User) => {
+                console.log(user);
+                Axios.get(
+                  "https://betgit.wiktorrudzki.pl/api/types/getByMatchIdAndUserId",
+                  {
+                    headers: {
+                      authorization: localStorage.getItem("token"),
+                      userId: user.id,
                       matchId: match.id,
-                      points: points,
                     },
-                    {
-                      headers: {
-                        authorization: localStorage.getItem("token"),
+                  }
+                ).then((res) => {
+                  if (res.data.taken) {
+                    const userType = res.data.data;
+                    console.log(user, userType, correctType);
+                    const points = countPoints(userType, correctType);
+                    console.log(points);
+                    Axios.patch(
+                      "https://betgit.wiktorrudzki.pl/api/types/addPoints",
+                      {
+                        id: userType[0].id,
+                        points: points,
                       },
-                    }
-                  ).then((response) => {
-                    if (response.data.added) {
-                      Axios.patch(
-                        "https://betgit.wiktorrudzki.pl/api/user/addPoints",
-                        {
-                          points: points,
-                          userId: user.id,
+                      {
+                        headers: {
+                          authorization: localStorage.getItem("token"),
                         },
-                        {
-                          headers: {
-                            authorization: localStorage.getItem("token"),
+                      }
+                    ).then((response) => {
+                      if (response.data.added) {
+                        console.log("adding points to user");
+                        Axios.patch(
+                          "https://betgit.wiktorrudzki.pl/api/user/addPoints",
+                          {
+                            points: points,
+                            userId: user.id,
                           },
-                        }
-                      ).then((res) => {
-                        console.log(res.data.message);
-                      });
-                    }
-                  });
-                } else {
-                  console.log(res.data.message);
-                }
+                          {
+                            headers: {
+                              authorization: localStorage.getItem("token"),
+                            },
+                          }
+                        ).then((res) => {
+                          console.log(res.data.message);
+                        });
+                      }
+                    });
+                  } else {
+                    console.log(res.data.message);
+                  }
+                });
               });
-            });
-          } else {
-            console.log(response.data.message);
+            } else {
+              console.log(response.data.message);
+            }
           }
-        });
+        );
       } else {
         console.log(res.data.message);
       }
