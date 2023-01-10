@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useRoute } from "../../../hooks/useRoute";
 import { useUser } from "../../../hooks/useUser";
@@ -6,18 +6,28 @@ import userIcon from "../../../images/user.svg";
 import barsIcon from "../../../images/bars.svg";
 import xIcon from "../../../images/x.svg";
 import "./phone-nav.css";
+import { useShowMenu } from "../../../hooks/useShowMenu";
 
 const PhoneNav = () => {
   const { currentRoute } = useRoute();
   const { currentUser } = useUser();
 
-  const [showMenu, setShowMenu] = useState(false);
+  const { showMenu, setShowMenu } = useShowMenu();
+
+  // const [showMenu, setShowMenu] = useState(false);
   const phoneNavRef = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {
     setShowMenu(false);
     //eslint-disable-next-line
   }, [currentRoute]);
+
+  useEffect(() => {
+    if (!showMenu) {
+      hideMenu();
+    }
+    //eslint-disable-next-line
+  }, [showMenu]);
 
   const checkRoute = (route: string) => {
     if (route === "/") {
@@ -31,6 +41,7 @@ const PhoneNav = () => {
     if (phoneNavRef.current) {
       phoneNavRef.current.style.animation =
         "hide-nav 0.8s ease-in-out forwards";
+      setShowMenu(false);
     }
   };
 
