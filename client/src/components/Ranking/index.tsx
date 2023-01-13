@@ -4,16 +4,10 @@ import UserScore from "./components/UserScore";
 import "./styles.css";
 import { User } from "./types";
 
-type Props = {
-  changeRoute: React.Dispatch<React.SetStateAction<string>>;
-};
-
-const Ranking = ({ changeRoute }: Props) => {
+const Ranking = () => {
   const [allUsers, setAllUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    changeRoute("/ranking");
-
     Axios.get(`https://betgit.wiktorrudzki.pl/api/user/`).then((res: any) => {
       if (res.data.get) {
         setAllUsers(
@@ -23,7 +17,6 @@ const Ranking = ({ changeRoute }: Props) => {
         console.log("error while getting users");
       }
     });
-    //eslint-disable-next-line
   }, []);
 
   return (

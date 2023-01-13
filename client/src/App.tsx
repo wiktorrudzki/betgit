@@ -4,7 +4,6 @@ import Login from "./components/Register+Login/Login";
 import MyBets from "./components/MyBets";
 import Nav from "./components/navigation";
 import Ranking from "./components/Ranking";
-import { useRoute } from "./hooks/useRoute";
 import Register from "./components/Register+Login/Register";
 import Logout from "./components/Logout";
 import { useUser } from "./hooks/useUser";
@@ -16,7 +15,6 @@ import "./styles/match-form-styles/styles.css";
 import { useShowMenu } from "./hooks/useShowMenu";
 
 function App() {
-  const { setCurrentRoute } = useRoute();
   const { setCurrentUser } = useUser();
 
   const { setShowMenu } = useShowMenu();
@@ -51,26 +49,26 @@ function App() {
         <Nav />
         <div onClick={() => handleClickOutsideNav()}>
           <Routes>
-            <Route path="/" element={<Home changeRoute={setCurrentRoute} />} />
+            <Route path="/" element={<Home />} />
             <Route
               path="/mojeBety"
-              element={<MyBets changeRoute={setCurrentRoute} />}
+              element={<MyBets />}
             />
             <Route
               path="/ranking"
-              element={<Ranking changeRoute={setCurrentRoute} />}
+              element={<Ranking />}
             />
             <Route
               path="/rejestracja"
-              element={<Register changeRoute={setCurrentRoute} />}
+              element={<Register />}
             />
             <Route
               path="/logowanie"
-              element={<Login changeRoute={setCurrentRoute} />}
+              element={<Login />}
             />
             <Route
               path="/wylogowanie"
-              element={<Logout changeRoute={setCurrentRoute} />}
+              element={<Logout />}
             />
           </Routes>
         </div>

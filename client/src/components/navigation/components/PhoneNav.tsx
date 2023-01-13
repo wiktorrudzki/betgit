@@ -1,6 +1,5 @@
 import { useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useRoute } from "../../../hooks/useRoute";
+import { Link, useLocation } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser";
 import userIcon from "../../../images/user.svg";
 import barsIcon from "../../../images/bars.svg";
@@ -9,7 +8,7 @@ import "./phone-nav.css";
 import { useShowMenu } from "../../../hooks/useShowMenu";
 
 const PhoneNav = () => {
-  const { currentRoute } = useRoute();
+  const currentRoute = useLocation();
   const { currentUser } = useUser();
 
   const { showMenu, setShowMenu } = useShowMenu();
@@ -20,7 +19,7 @@ const PhoneNav = () => {
   useEffect(() => {
     setShowMenu(false);
     //eslint-disable-next-line
-  }, [currentRoute]);
+  }, [currentRoute.pathname]);
 
   useEffect(() => {
     if (!showMenu) {
@@ -31,9 +30,9 @@ const PhoneNav = () => {
 
   const checkRoute = (route: string) => {
     if (route === "/") {
-      return currentRoute === route;
+      return currentRoute.pathname === route;
     } else {
-      return currentRoute.includes(route);
+      return currentRoute.pathname.includes(route);
     }
   };
 

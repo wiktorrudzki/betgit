@@ -1,14 +1,10 @@
 import Axios from "axios";
-import React, { useEffect, useReducer } from "react";
+import React, { useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser";
 import { Match } from "../../Home/components/types/Match";
 import "../styles.css";
 import Wrapper from "../Wrapper";
-
-type Props = {
-  changeRoute: React.Dispatch<React.SetStateAction<string>>;
-};
 
 type RegisterStatus = {
   username: string;
@@ -25,14 +21,9 @@ type Actions =
   | { type: "error"; payload: boolean; errorMessage: string }
   | { type: "clear" };
 
-const Register = ({ changeRoute }: Props) => {
+const Register = () => {
   const { setCurrentUser } = useUser();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    changeRoute("/rejestracja");
-    //eslint-disable-next-line
-  }, []);
 
   const registerStatusReducer = (
     state: RegisterStatus,

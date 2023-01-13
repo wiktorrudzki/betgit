@@ -45,18 +45,15 @@
   font-weight: bold;
   cursor: pointer;
   transition: 0.4s all ease-out;
+  &:hover {
+    background-position: left;
+  }
 }
-
-.submit-btn:hover {
-  background-position: left;
-}
-
 .disable-submit-btn {
   cursor: not-allowed;
-}
-
-.disable-submit-btn:hover {
-  background-position: right;
+  &:hover {
+    background-position: right;
+  }
 }
 
 @media (max-width: 1024px) {

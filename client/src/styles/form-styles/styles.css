@@ -76,7 +76,6 @@ body {
   cursor: pointer;
   transition: 0.4s all ease-out;
 }
-
 .submit-btn:hover {
   background-position: left;
 }
@@ -84,7 +83,6 @@ body {
 .disable-submit-btn {
   cursor: not-allowed;
 }
-
 .disable-submit-btn:hover {
   background-position: right;
 }

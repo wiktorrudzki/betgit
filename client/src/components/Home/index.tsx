@@ -1,20 +1,14 @@
-import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
 import AdminHome from "./components/admin/AdminHome";
 import UserHome from "./components/user/UserHome";
 import "./styles.css";
 
-type Props = {
-  changeRoute: React.Dispatch<React.SetStateAction<string>>;
-};
-
-const Home = ({ changeRoute }: Props) => {
+const Home = () => {
   const { currentUser } = useUser();
 
-  useEffect(() => {
-    changeRoute("/");
-    //eslint-disable-next-line
-  }, []);
+  const location = useLocation();
+  console.log(location.pathname);
 
   return (
     <div className="home-page">

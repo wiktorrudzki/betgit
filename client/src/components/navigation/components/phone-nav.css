@@ -112,13 +112,10 @@ body {
   position: relative;
   font-size: 1em;
 }
-
-.link:visited,
-.link:active {
+.link:visited, .link:active {
   text-decoration: none;
   color: #000;
 }
-
 .link::after {
   transition: 0.5s ease-in-out;
   content: "";
@@ -131,7 +128,6 @@ body {
   margin: auto;
   z-index: 3;
 }
-
 .link:hover::after {
   width: 100%;
 }
@@ -142,13 +138,10 @@ body {
   position: relative;
   font-size: 1em;
 }
-
-.link-active:visited,
-.link-active:active {
+.link-active:active, .link-active:visited {
   text-decoration: none;
   color: #000;
 }
-
 .link-active::after {
   transition: 0.5s ease-in-out;
   content: "";
@@ -164,7 +157,6 @@ body {
 .nav-user-wrapper {
   gap: 0.3em;
 }
-
 .nav-user-wrapper > h3 {
   font-size: 0.9em;
 }/*# sourceMappingURL=phone-nav.css.map */

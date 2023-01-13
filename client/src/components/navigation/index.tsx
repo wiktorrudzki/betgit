@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useRoute } from "../../hooks/useRoute";
+import { Link, useLocation } from "react-router-dom";
 import { useUser } from "../../hooks/useUser";
 import userIcon from "../../images/user.svg";
 import PhoneNav from "./components/PhoneNav";
 import "./styles.css";
 
 const Nav = () => {
-  const { currentRoute } = useRoute();
+  const currentRoute = useLocation();
   const { currentUser } = useUser();
   const [phoneScreen, setPhoneScreen] = useState(false);
 
   const checkRoute = (route: string) => {
     if (route === "/") {
-      return currentRoute === route;
+      return currentRoute.pathname === route;
     } else {
-      return currentRoute.includes(route);
+      return currentRoute.pathname.includes(route);
     }
   };
 

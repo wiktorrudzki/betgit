@@ -47,7 +47,6 @@ body {
   cursor: pointer;
   transition: 0.4s all ease-out;
 }
-
 .logout-btn:hover {
   background-position: left;
 }/*# sourceMappingURL=styles.css.map */

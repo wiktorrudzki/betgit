@@ -44,28 +44,25 @@
   color: var(--primary);
   transition: none;
   cursor: pointer;
-}
-
-.logo:visited,
-.logo:active {
-  color: var(--primary);
-}
-
-.link::after {
-  transition: 0.5s ease-in-out;
-  content: "";
-  position: relative;
-  width: 0%;
-  bottom: -4px;
-  height: 3px;
-  display: block;
-  background-color: var(--primary);
-  margin: auto;
-  z-index: 3;
-}
-
-.link:hover::after {
-  width: 100%;
+  &:visited,
+  &:active {
+    color: var(--primary);
+  }
+  &::after {
+    transition: 0.5s ease-in-out;
+    content: "";
+    position: relative;
+    width: 0%;
+    bottom: -4px;
+    height: 3px;
+    display: block;
+    background-color: var(--primary);
+    margin: auto;
+    z-index: 3;
+  }
+  &:hover::after {
+    width: 100%;
+  }
 }
 
 .link-active {
@@ -73,33 +70,30 @@
   color: #000;
   position: relative;
   font-size: 1.3em;
-}
-
-.link-active:visited,
-.link-active:active {
-  text-decoration: none;
-  color: #000;
-}
-
-.link-active::after {
-  transition: 0.5s ease-in-out;
-  content: "";
-  position: relative;
-  width: 100%;
-  bottom: -4px;
-  height: 3px;
-  display: block;
-  background-color: var(--primary);
-  margin: auto;
+  &:active,
+  &:visited {
+    text-decoration: none;
+    color: #000;
+  }
+  &::after {
+    transition: 0.5s ease-in-out;
+    content: "";
+    position: relative;
+    width: 100%;
+    bottom: -4px;
+    height: 3px;
+    display: block;
+    background-color: var(--primary);
+    margin: auto;
+  }
 }
 
 .nav-user-wrapper {
   @include flex;
   gap: 0.6em;
-}
-
-.nav-user-wrapper > h3 {
-  font-size: 1.3em;
+  > h3 {
+    font-size: 1.3em;
+  }
 }
 
 @media (max-width: 1024px) {

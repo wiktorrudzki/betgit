@@ -1,13 +1,9 @@
 import Axios from "axios";
-import React, { useEffect, useReducer } from "react";
+import React, { useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser";
 import "../styles.css";
 import Wrapper from "../Wrapper";
-
-type Props = {
-  changeRoute: React.Dispatch<React.SetStateAction<string>>;
-};
 
 type LoginStatus = {
   username: string;
@@ -22,14 +18,9 @@ type Actions =
   | { type: "error"; payload: boolean; errorMessage: string }
   | { type: "clear" };
 
-const Login = ({ changeRoute }: Props) => {
+const Login = () => {
   const { setCurrentUser } = useUser();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    changeRoute("/logowanie");
-    //eslint-disable-next-line
-  }, []);
 
   const loginStatusReducer = (
     state: LoginStatus,

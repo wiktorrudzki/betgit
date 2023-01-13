@@ -19,8 +19,7 @@
   font-weight: bold;
   cursor: pointer;
   transition: 0.4s all ease-out;
-}
-
-.logout-btn:hover {
-  background-position: left;
+  &:hover {
+    background-position: left;
+  }
 }

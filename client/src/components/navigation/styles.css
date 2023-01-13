@@ -79,13 +79,11 @@ body {
   transition: none;
   cursor: pointer;
 }
-
 .logo:visited,
 .logo:active {
   color: var(--primary);
 }
-
-.link::after {
+.logo::after {
   transition: 0.5s ease-in-out;
   content: "";
   position: relative;
@@ -97,8 +95,7 @@ body {
   margin: auto;
   z-index: 3;
 }
-
-.link:hover::after {
+.logo:hover::after {
   width: 100%;
 }
 
@@ -108,13 +105,11 @@ body {
   position: relative;
   font-size: 1.3em;
 }
-
-.link-active:visited,
-.link-active:active {
+.link-active:active,
+.link-active:visited {
   text-decoration: none;
   color: #000;
 }
-
 .link-active::after {
   transition: 0.5s ease-in-out;
   content: "";
@@ -134,7 +129,6 @@ body {
   align-items: center;
   gap: 0.6em;
 }
-
 .nav-user-wrapper > h3 {
   font-size: 1.3em;
 }
@@ -172,4 +166,4 @@ body {
     cursor: pointer;
     z-index: 2;
   }
-}/*# sourceMappingURL=styles.css.map */
+} /*# sourceMappingURL=styles.css.map */

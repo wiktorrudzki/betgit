@@ -6,11 +6,7 @@ import { Type } from "../Home/components/user/types";
 import UserType from "./components/UserType";
 import "./styles.css";
 
-type Props = {
-  changeRoute: React.Dispatch<React.SetStateAction<string>>;
-};
-
-const MyBets = ({ changeRoute }: Props) => {
+const MyBets = () => {
   const { currentUser } = useUser();
   const [userTypes, setUserTypes] = useState<Type[]>([]);
   const [userTypesFiltered, setUserTypesFiltered] = useState<Type[]>([]);
@@ -83,11 +79,12 @@ const MyBets = ({ changeRoute }: Props) => {
   };
 
   useEffect(() => {
-    changeRoute("/mojeBety");
+    let loaded = true;
+    if (loaded) getUserTypes();
 
-    getUserTypes();
-
-    //eslint-disable-next-line
+    return () => {
+      loaded = false;
+    };
   }, []);
 
   return (
