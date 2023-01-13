@@ -11,11 +11,7 @@ const Nav = () => {
   const [phoneScreen, setPhoneScreen] = useState(false);
 
   const checkRoute = (route: string) => {
-    if (route === "/") {
-      return currentRoute.pathname === route;
-    } else {
-      return currentRoute.pathname.includes(route);
-    }
+    return currentRoute.pathname === route;
   };
 
   useEffect(() => {
@@ -43,6 +39,8 @@ const Nav = () => {
     return { innerWidth, innerHeight };
   }
 
+  console.log(currentRoute.pathname);
+
   return (
     <nav className="nav">
       {phoneScreen ? (
@@ -54,7 +52,7 @@ const Nav = () => {
 
             <Link
               to="/"
-              className={`${checkRoute("/") ? "link-active" : "link"}`}
+              className={`${checkRoute("/") ? "link link-active" : "link"}`}
             >
               {currentUser?.isAdmin ? "Kontroluj grę" : "Obstawiaj"}
             </Link>
@@ -64,7 +62,7 @@ const Nav = () => {
               <Link
                 to="/mojeBety"
                 className={`${
-                  checkRoute("/mojeBety") ? "link-active" : "link"
+                  checkRoute("/mojeBety") ? "link link-active" : "link"
                 }`}
               >
                 Moje bety
@@ -72,7 +70,7 @@ const Nav = () => {
             )}
             <Link
               to="/ranking"
-              className={`${checkRoute("/ranking") ? "link-active" : "link"}`}
+              className={`${checkRoute("/ranking") ? "link link-active" : "link"}`}
             >
               Ranking
             </Link>
@@ -92,7 +90,7 @@ const Nav = () => {
               <Link
                 to="/wylogowanie"
                 className={`${
-                  checkRoute("/wylogowanie") ? "link-active" : "link"
+                  checkRoute("/wylogowanie") ? "link link-active" : "link"
                 }`}
               >
                 Wyloguj się
@@ -103,7 +101,7 @@ const Nav = () => {
               <Link
                 to="/logowanie"
                 className={`${
-                  checkRoute("/logowanie") ? "link-active" : "link"
+                  checkRoute("/logowanie") ? "link link-active" : "link"
                 }`}
               >
                 Zaloguj się
@@ -111,7 +109,7 @@ const Nav = () => {
               <Link
                 to="/rejestracja"
                 className={`${
-                  checkRoute("/rejestracja") ? "link-active" : "link"
+                  checkRoute("/rejestracja") ? "link link-active" : "link"
                 }`}
               >
                 Zarejestruj się

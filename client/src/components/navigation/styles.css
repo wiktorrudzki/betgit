@@ -79,24 +79,8 @@ body {
   transition: none;
   cursor: pointer;
 }
-.logo:visited,
-.logo:active {
+.logo:visited, .logo:active {
   color: var(--primary);
-}
-.logo::after {
-  transition: 0.5s ease-in-out;
-  content: "";
-  position: relative;
-  width: 0%;
-  bottom: -4px;
-  height: 3px;
-  display: block;
-  background-color: var(--primary);
-  margin: auto;
-  z-index: 3;
-}
-.logo:hover::after {
-  width: 100%;
 }
 
 .link-active {
@@ -105,8 +89,7 @@ body {
   position: relative;
   font-size: 1.3em;
 }
-.link-active:active,
-.link-active:visited {
+.link-active:active, .link-active:visited {
   text-decoration: none;
   color: #000;
 }
@@ -166,4 +149,4 @@ body {
     cursor: pointer;
     z-index: 2;
   }
-} /*# sourceMappingURL=styles.css.map */
+}/*# sourceMappingURL=styles.css.map */

@@ -26,13 +26,17 @@ body {
 }
 
 .form-wrapper {
-  height: 88vh;
+  min-height: 88vh;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 3em;
   background-color: var(--gray);
+  padding: 1em 0;
 }
 
 .form {

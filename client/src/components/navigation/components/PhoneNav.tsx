@@ -29,11 +29,7 @@ const PhoneNav = () => {
   }, [showMenu]);
 
   const checkRoute = (route: string) => {
-    if (route === "/") {
-      return currentRoute.pathname === route;
-    } else {
-      return currentRoute.pathname.includes(route);
-    }
+    return currentRoute.pathname === route;
   };
 
   const hideMenu = () => {
@@ -83,7 +79,7 @@ const PhoneNav = () => {
             <Link
               onClick={hideMenu}
               to="/"
-              className={`${checkRoute("/") ? "link-active" : "link"}`}
+              className={`${checkRoute("/") ? "link link-active" : "link"}`}
             >
               {currentUser?.isAdmin ? "Kontroluj grę" : "Obstawiaj"}
             </Link>
@@ -94,7 +90,7 @@ const PhoneNav = () => {
                 onClick={hideMenu}
                 to="/mojeBety"
                 className={`${
-                  checkRoute("/mojeBety") ? "link-active" : "link"
+                  checkRoute("/mojeBety") ? "link link-active" : "link"
                 }`}
               >
                 Moje bety
@@ -103,7 +99,9 @@ const PhoneNav = () => {
             <Link
               onClick={hideMenu}
               to="/ranking"
-              className={`${checkRoute("/ranking") ? "link-active" : "link"}`}
+              className={`${
+                checkRoute("/ranking") ? "link link-active" : "link"
+              }`}
             >
               Ranking
             </Link>
@@ -122,7 +120,7 @@ const PhoneNav = () => {
                 onClick={hideMenu}
                 to="/wylogowanie"
                 className={`${
-                  checkRoute("/wylogowanie") ? "link-active" : "link"
+                  checkRoute("/wylogowanie") ? "link link-active" : "link"
                 }`}
               >
                 Wyloguj się
@@ -134,7 +132,7 @@ const PhoneNav = () => {
                 onClick={hideMenu}
                 to="/logowanie"
                 className={`${
-                  checkRoute("/logowanie") ? "link-active" : "link"
+                  checkRoute("/logowanie") ? "link link-active" : "link"
                 }`}
               >
                 Zaloguj się
@@ -143,7 +141,7 @@ const PhoneNav = () => {
                 onClick={hideMenu}
                 to="/rejestracja"
                 className={`${
-                  checkRoute("/rejestracja") ? "link-active" : "link"
+                  checkRoute("/rejestracja") ? "link link-active" : "link"
                 }`}
               >
                 Zarejestruj się

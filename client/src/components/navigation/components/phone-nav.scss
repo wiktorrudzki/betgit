@@ -82,6 +82,9 @@
   &:hover::after {
     width: 100%;
   }
+  &:last-child {
+    padding-bottom: 4px;
+  }
 }
 
 .link-active {

@@ -131,6 +131,9 @@ body {
 .link:hover::after {
   width: 100%;
 }
+.link:last-child {
+  padding-bottom: 4px;
+}
 
 .link-active {
   text-decoration: none;
